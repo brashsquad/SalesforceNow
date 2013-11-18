@@ -1,6 +1,8 @@
 package com.blntsoft.salesforcenow;
 
 import com.blntsoft.salesforcenow.util.SystemUiHider;
+import com.salesforce.androidsdk.rest.RestClient;
+import com.salesforce.androidsdk.ui.sfnative.SalesforceActivity;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -9,6 +11,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ArrayAdapter;
+
+import java.util.ArrayList;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -16,7 +21,11 @@ import android.view.View;
  *
  * @see SystemUiHider
  */
-public class MainActivity extends Activity {
+public class MainActivity extends SalesforceActivity {
+
+    private RestClient client;
+    private View rootView;
+
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -50,6 +59,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main_layout);
+
+        rootView = findViewById(R.id.root);
 
         final View controlsView = findViewById(R.id.fullscreen_content_controls);
         final View contentView = findViewById(R.id.fullscreen_content);
@@ -124,6 +135,22 @@ public class MainActivity extends Activity {
         delayedHide(100);
     }
 
+    @Override
+    public void onResume() {
+        // Hide everything until we are logged in
+        rootView.setVisibility(View.INVISIBLE);
+
+        super.onResume();
+    }
+
+    @Override
+    public void onResume(RestClient client) {
+        // Keeping reference to rest client
+        this.client = client;
+
+        // Show everything
+        rootView.setVisibility(View.VISIBLE);
+    }
 
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
