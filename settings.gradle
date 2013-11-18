@@ -1,0 +1,2 @@
+include ':SalesforceSDK'
+project(':SalesforceSDK').projectDir = new File('../SalesforceMobileSDK-Android/native/SalesforceSDK')
