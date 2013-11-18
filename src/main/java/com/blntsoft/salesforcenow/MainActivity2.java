@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.blntsoft.salesforcenow.service.SpeechRecognizerService;
 import com.blntsoft.salesforcenow.util.SystemUiHider;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.ui.sfnative.SalesforceActivity;
@@ -59,6 +60,7 @@ public class MainActivity2 extends SalesforceActivity {
         super.onResume();
     }
 
+    private SpeechRecognizerService speechRecognizerService;
     @Override
     public void onResume(RestClient client) {
         // Keeping reference to rest client
@@ -66,6 +68,14 @@ public class MainActivity2 extends SalesforceActivity {
 
         // Show everything
         rootView.setVisibility(View.VISIBLE);
+
+        startService(new Intent(this, SpeechRecognizerService.class));
+    }
+
+    @Override
+    public void onPause() {
+        stopService(new Intent(this, SpeechRecognizerService.class));
+        super.onPause();
     }
 
     /**
@@ -98,6 +108,10 @@ public class MainActivity2 extends SalesforceActivity {
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, getString(R.string.speak_now_hint));
         startActivityForResult(intent, VOICE_EVENT_ID);
+    }
+
+    public void onServiceButtonClick(View v) {
+        startService(new Intent(this, SpeechRecognizerService.class));
     }
 
 }

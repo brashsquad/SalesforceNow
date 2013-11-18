@@ -28,6 +28,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".service.SpeechRecognizerService"
+            android:enabled="true"
+            >
+        </service>
+
     </application>
 
     <!--
