@@ -1,0 +1,25 @@
+<RelativeLayout
+    android:background="#0099cc"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root">
+
+    <EditText
+        android:id="@+id/ok_salesforce_edit_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:hint="@string/ok_salesforce_hint"
+        android:background="#FFFFFF"
+        android:padding="10dp"
+        android:layout_alignParentTop="true"/>
+
+    <Button
+        android:id="@+id/salesforce_now_button"
+        android:onClick="onVoiceButtonClick"
+        android:layout_toRightOf="@+id/ok_salesforce_edit_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:background="@android:drawable/ic_btn_speak_now" />
+</RelativeLayout>
+

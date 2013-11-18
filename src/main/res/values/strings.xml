@@ -8,5 +8,7 @@
     <string name="account_type">com.blntsoft.salesforcenow.login</string>
     <string name="app_package">com.blntsoft.salesforcenow</string>
 
+    <string name="ok_salesforce_hint">Search, or say \"Ok Salesforce\"</string>
+    <string name="speak_now_hint">Speak now</string>
 
 </resources>

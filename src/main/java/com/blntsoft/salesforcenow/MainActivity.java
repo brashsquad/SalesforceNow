@@ -23,8 +23,9 @@ import java.util.ArrayList;
  */
 public class MainActivity extends SalesforceActivity {
 
-    private RestClient client;
-    private View rootView;
+    /*
+     * Constants
+     */
 
     /**
      * Whether or not the system UI should be auto-hidden after
@@ -49,10 +50,21 @@ public class MainActivity extends SalesforceActivity {
      */
     private static final int HIDER_FLAGS = SystemUiHider.FLAG_HIDE_NAVIGATION;
 
+
+    /*
+     * Members
+     */
+
     /**
      * The instance of the {@link SystemUiHider} for this activity.
      */
     private SystemUiHider mSystemUiHider;
+    private RestClient client;
+    private View rootView;
+
+    /*
+     * Activity
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,6 +164,10 @@ public class MainActivity extends SalesforceActivity {
         rootView.setVisibility(View.VISIBLE);
     }
 
+    /*
+     * Specific
+     */
+
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
@@ -183,4 +199,10 @@ public class MainActivity extends SalesforceActivity {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
     }
+
+    public void onVoiceButtonClick(View v) {
+
+
+    }
+
 }

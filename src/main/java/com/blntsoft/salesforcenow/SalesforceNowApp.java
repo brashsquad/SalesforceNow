@@ -40,7 +40,7 @@ public class SalesforceNowApp extends Application {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		SalesforceSDKManager.initNative(getApplicationContext(), new KeyImpl(), MainActivity.class);
+		SalesforceSDKManager.initNative(getApplicationContext(), new KeyImpl(), MainActivity2.class);
 
 		/*
 		 * Un-comment the line below to enable push notifications in this app.

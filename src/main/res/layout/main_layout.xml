@@ -6,9 +6,35 @@
     tools:context=".MainActivity"
     android:id="@+id/root">
 
+
+    <RelativeLayout
+        android:id="@+id/fullscreen_content"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_gravity="center_horizontal">
+
+        <EditText
+            android:id="@+id/ok_salesforce_edit_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="@string/ok_salesforce_hint"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:layout_alignParentTop="true"/>
+
+        <Button
+            android:id="@+id/salesforce_now_button"
+            android:onClick="onVoiceButtonClick"
+            android:layout_toRightOf="@+id/ok_salesforce_edit_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:background="@android:drawable/ic_btn_speak_now" />
+    </RelativeLayout>
+
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,
          TextureView, etc. -->
+    <!--
     <TextView android:id="@+id/fullscreen_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,10 +44,12 @@
         android:textSize="50sp"
         android:gravity="center"
         android:text="@string/dummy_content" />
+    -->
 
     <!-- This FrameLayout insets its children based on system windows using
          android:fitsSystemWindows. -->
-    <FrameLayout android:layout_width="match_parent"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
