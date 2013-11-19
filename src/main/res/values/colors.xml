@@ -2,4 +2,6 @@
 
     <color name="black_overlay">#66000000</color>
 
+    <color name="sf_blue">#2a94d6</color>
+    <color name="card_background">#ececec</color>
 </resources>

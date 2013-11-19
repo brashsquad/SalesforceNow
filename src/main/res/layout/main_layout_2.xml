@@ -1,5 +1,5 @@
-<RelativeLayout
-    android:background="#0099cc"
+<RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/sf_blue"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,7 +12,8 @@
         android:hint="@string/ok_salesforce_hint"
         android:background="#FFFFFF"
         android:padding="10dp"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/salesforce_now_button"
@@ -20,7 +21,89 @@
         android:layout_toRightOf="@+id/ok_salesforce_edit_text"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:background="@android:drawable/ic_btn_speak_now" />
+        android:background="@android:drawable/ic_btn_speak_now"
+        android:layout_centerHorizontal="true"
+        />
 
+    <Button
+        android:id="@+id/new_button"
+        android:onClick="onNewButtonClick"
+        android:layout_below="@+id/ok_salesforce_edit_text"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="New"
+        android:visibility="gone"
+        />
+    <Button
+        android:id="@+id/view_button"
+        android:onClick="onViewButtonClick"
+        android:layout_below="@+id/ok_salesforce_edit_text"
+        android:layout_toRightOf="@+id/new_button"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="View"
+        android:visibility="gone"
+        />
+
+    <ScrollView
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/ok_salesforce_edit_text"
+        android:background="#ffffff">
+
+        <LinearLayout
+            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:showDividers="middle"
+            >
+
+        <fragment
+            android:id="@+id/account_card_fragment"
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:layout_margin="10dp"
+            android:name="com.blntsoft.salesforcenow.card.AccountCardFragment"
+            tools:layout="@layout/account_card_fragment"
+            android:tag="com.blntsoft.salesforcenow.card.AccountCardFragment"
+            />
+
+
+        <fragment
+            android:id="@+id/contact_card_fragment"
+            android:layout_margin="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:name="com.blntsoft.salesforcenow.card.ContactCardFragment"
+            tools:layout="@layout/contact_card_fragment"
+            android:tag="com.blntsoft.salesforcenow.card.ContactCardFragment"
+            />
+
+        <fragment
+            android:id="@+id/opportunity_card_fragment"
+            android:layout_margin="10dp"
+            android:layout_width="fill_parent"
+            android:layout_height="250dp"
+            android:name="com.blntsoft.salesforcenow.card.OpportunityCardFragment"
+            tools:layout="@layout/opportunity_card_fragment"
+            android:tag="com.blntsoft.salesforcenow.card.OpportunityCardFragment"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+    <!--
+      Add cards
+        . Account
+        . Contacts
+        . Opportunity
+
+        . Leads
+        . Feed?
+        . People
+        . Groups
+
+        Live data + background refresh
+    -->
 </RelativeLayout>
 
