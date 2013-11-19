@@ -88,10 +88,4 @@ public class MainActivity2 extends SalesforceActivity {
         startActivity(intent);
     }
 
-    public void onServiceButtonClick(View v) {
-        Intent i = SpeechActivationService.makeStartServiceIntent(this, null);
-        this.startService(i);
-        Log.d("SalesforceNow", "started service for ");
-    }
-
 }

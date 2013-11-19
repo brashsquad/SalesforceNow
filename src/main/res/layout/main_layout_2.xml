@@ -22,13 +22,5 @@
         android:layout_width="wrap_content"
         android:background="@android:drawable/ic_btn_speak_now" />
 
-    <Button
-        android:id="@+id/speech_recognizer_button"
-        android:onClick="onServiceButtonClick"
-        android:layout_below="@+id/ok_salesforce_edit_text"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:text="Speech Recognizer Start"/>
-
 </RelativeLayout>
 
