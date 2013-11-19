@@ -14,45 +14,50 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:text="Category"
+        android:text="Type - Industry"
         android:layout_below="@+id/account_name"
         android:layout_alignParentLeft="true"
         android:id="@+id/type_name" />
 
     <ImageView
         android:id="@+id/account_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_7_location_map"
-        android:layout_toLeftOf="@+id/account_web" />
+        android:layout_toLeftOf="@+id/account_web"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/account_web"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_7_location_web_site"
-        android:layout_toLeftOf="@+id/account_email" />
+        android:layout_toLeftOf="@+id/account_email"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/account_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_5_content_email"
-        android:layout_toLeftOf="@+id/account_text" />
+        android:layout_toLeftOf="@+id/account_text"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/account_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_6_social_chat"
-        android:layout_toLeftOf="@+id/account_call" />
+        android:layout_toLeftOf="@+id/account_call"
+        android:clickable="true"/>
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/account_call"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_10_device_access_call"/>
+        android:src="@drawable/ic_10_device_access_call"
+        android:clickable="true"/>
 
 </RelativeLayout>

@@ -21,36 +21,36 @@
 
     <ImageView
         android:id="@+id/contact_map"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_7_location_map"
         android:layout_toLeftOf="@+id/contact_web" />
 
     <ImageView
         android:id="@+id/contact_web"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_7_location_web_site"
         android:layout_toLeftOf="@+id/contact_email" />
 
     <ImageView
         android:id="@+id/contact_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_5_content_email"
         android:layout_toLeftOf="@+id/contact_text" />
 
     <ImageView
         android:id="@+id/contact_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:src="@drawable/ic_6_social_chat"
         android:layout_toLeftOf="@+id/contact_call" />
 
     <ImageView
         android:id="@+id/contact_call"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:src="@drawable/ic_10_device_access_call"/>
