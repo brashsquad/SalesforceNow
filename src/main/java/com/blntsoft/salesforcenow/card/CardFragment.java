@@ -51,7 +51,7 @@ public abstract class CardFragment extends Fragment {
                         JSONArray records = result.asJSONObject().getJSONArray("records");
                         for (int i=0; i<records.length(); i++) {
                             JSONObject json = records.getJSONObject(i);
-                            getArrayAdapter().add(json.getString("Name"));
+                            getArrayAdapter().add(json);
                         }
                     } catch (Exception e) {
                         onError(e);
