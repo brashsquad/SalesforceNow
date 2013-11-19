@@ -64,7 +64,7 @@ public class SearchActivity extends Activity {
             } else { //search
 
                 StringBuilder searchString = new StringBuilder();
-                StringBuilder searchScope = new StringBuilder();
+                ArrayList<String> searchScopeList = new ArrayList<String>();
                 if (wordList.contains("in")) {
                     Log.d("SearchActivity", "SearchIn");
                     int index = wordList.indexOf("in");
@@ -75,7 +75,10 @@ public class SearchActivity extends Activity {
                     //"In" keyword should not be the last element
                     if (index < wordList.size()) {
                         for (int i = index + 1; i < wordList.size(); i++) {
-                            searchScope.append(wordList.get(i)).append(" ");
+                            String scopeObject = wordList.get(i);
+                            if (!scopeObject.equals("and") && !scopeObject.equals("or")) {
+                                searchScopeList.add(scopeObject);
+                            }
                         }
                     }
 
@@ -87,11 +90,11 @@ public class SearchActivity extends Activity {
                 }
 
                 Log.d("SearchActivity", "searchString: " + searchString.toString().trim());
-                Log.d("SearchActivity", "searchScope: " + searchScope.toString().trim());
+                Log.d("SearchActivity", "searchScope: " + searchScopeList.toString());
 
                 Intent searchIntent = new Intent(this, SearchResultActivity.class);
                 searchIntent.putExtra(SearchResultActivity.SEARCH_STRING_EXTRA, searchString.toString().trim());
-                searchIntent.putExtra(SearchResultActivity.SEARCH_SCOPE_EXTRA, searchScope.toString().trim());
+                searchIntent.putExtra(SearchResultActivity.SEARCH_SCOPE_EXTRA, searchScopeList);
                 startActivity(searchIntent);
             }
 

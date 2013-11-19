@@ -67,10 +67,10 @@ public class SearchResultActivity extends SalesforceActivity {
         try {
             Intent i = getIntent();
             String searchString = i.getStringExtra(SEARCH_STRING_EXTRA);
-            String searchScope = i.getStringExtra(SEARCH_SCOPE_EXTRA);
+            ArrayList<String> searchScopeList = i.getStringArrayListExtra(SEARCH_SCOPE_EXTRA);
 
             if (searchString != null && !searchString.equals("")) {
-                String sosl = getSearchSOSL(searchString, searchScope);
+                String sosl = getSearchSOSL(searchString, searchScopeList);
 
                 Log.d(TAG, "SOSL: " + sosl);
 
@@ -138,11 +138,17 @@ public class SearchResultActivity extends SalesforceActivity {
         return this.getSearchSOSL(searchString, null);
     }
 
-    private String getSearchSOSL(String searchString, String searchScope) {
+    private String getSearchSOSL(String searchString, ArrayList<String> searchScopeList) {
         StringBuilder sosl = new StringBuilder();
         sosl.append("FIND {*").append(searchString).append("*} IN ALL FIELDS ");
-        if (searchScope != null && !searchScope.equals("")) {
-            sosl.append("RETURNING ").append(searchScope).append("(id,name) ");
+        if (searchScopeList.size() > 0) {
+            sosl.append("RETURNING ");
+            for (int i = 0; i < searchScopeList.size(); i++) {
+                sosl.append(searchScopeList.get(i)).append("(id,name)");
+                if (i != searchScopeList.size() - 1) {
+                    sosl.append(", ");
+                } else sosl.append(" ");
+            }
         }
         sosl.append("LIMIT ").append(LIMIT);
         return sosl.toString();
