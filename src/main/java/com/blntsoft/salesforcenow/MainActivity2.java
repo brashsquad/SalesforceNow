@@ -6,10 +6,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Toast;
 
+import com.blntsoft.salesforcenow.service.SpeechActivationService;
 import com.blntsoft.salesforcenow.service.SpeechRecognizerService;
 import com.blntsoft.salesforcenow.util.SystemUiHider;
 import com.salesforce.androidsdk.rest.RestClient;
@@ -111,7 +113,11 @@ public class MainActivity2 extends SalesforceActivity {
     }
 
     public void onServiceButtonClick(View v) {
-        startService(new Intent(this, SpeechRecognizerService.class));
+
+        Intent i = SpeechActivationService.makeStartServiceIntent(this,
+                null);
+        this.startService(i);
+        Log.d("SalesforceNow", "started service for ");
     }
 
 }

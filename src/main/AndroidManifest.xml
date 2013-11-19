@@ -30,7 +30,7 @@
         </activity>
 
         <service
-            android:name=".service.SpeechRecognizerService"
+            android:name="root.gast.speech.activation.SpeechActivationService"
             android:enabled="true"
             >
         </service>
