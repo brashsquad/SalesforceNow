@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.blntsoft.salesforcenow.R;
 import com.blntsoft.salesforcenow.SalesforceNowApp;
+import com.blntsoft.salesforcenow.adapter.OpportunityAdapter;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.rest.RestRequest;
 import com.salesforce.androidsdk.rest.RestResponse;
@@ -26,7 +27,11 @@ import java.util.ArrayList;
  */
 public class OpportunityCardFragment extends CardFragment {
 
-    private ArrayAdapter<String> listAdapter;
+    private ArrayAdapter<JSONObject> listAdapter;
+
+    public OpportunityCardFragment() {
+        soql = "SELECT Id, Name, Type FROM Opportunity ORDER BY LastModifiedDate DESC LIMIT 5";
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,15 +41,10 @@ public class OpportunityCardFragment extends CardFragment {
 
     @Override
     public void onResume() {
-        listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<String>());
+        listAdapter = new OpportunityAdapter(getActivity());
         listView.setAdapter(listAdapter);
 
         super.onResume();
-    }
-
-    @Override
-    protected String getSoql() {
-        return "SELECT Id, Name FROM Opportunity ORDER BY LastModifiedDate DESC LIMIT 5";
     }
 
     @Override

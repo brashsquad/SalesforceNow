@@ -1,5 +1,7 @@
 package com.blntsoft.salesforcenow;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +12,10 @@ import android.widget.ListView;
 import com.blntsoft.salesforcenow.adapter.AccountAdapter;
 import com.blntsoft.salesforcenow.adapter.ContactAdapter;
 import com.blntsoft.salesforcenow.adapter.OpportunityAdapter;
+import com.blntsoft.salesforcenow.card.AccountCardFragment;
+import com.blntsoft.salesforcenow.card.CardFragment;
+import com.blntsoft.salesforcenow.card.ContactCardFragment;
+import com.blntsoft.salesforcenow.card.OpportunityCardFragment;
 import com.blntsoft.salesforcenow.service.SpeechRecognizerService;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.rest.RestRequest;
@@ -80,6 +86,25 @@ public class SearchResultActivity extends SalesforceActivity {
                 String sosl = getSearchSOSL(searchString, searchScopeList, searchFieldsCsv);
                 Log.d(TAG, "SOSL: " + sosl);
 
+                /*
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction trx = fragmentManager.beginTransaction();
+                CardFragment accountCardFragment = (CardFragment)fragmentManager.findFragmentByTag(AccountCardFragment.class.getName());
+                trx.remove(accountCardFragment);
+                //or
+                accountCardFragment.onResume(client);
+
+
+                CardFragment contactCardFragment = (CardFragment)fragmentManager.findFragmentByTag(ContactCardFragment.class.getName());
+                contactCardFragment.onResume(client);
+
+                CardFragment opportunityCardFragment = (CardFragment)fragmentManager.findFragmentByTag(OpportunityCardFragment.class.getName());
+                opportunityCardFragment.onResume(client);
+
+                trx.commit();
+                */
+                /*
+
                 final RestRequest request = RestRequest.getRequestForSearch("v29.0", sosl);
 
                 client.sendAsync(request, new RestClient.AsyncRequestCallback() {
@@ -118,7 +143,7 @@ public class SearchResultActivity extends SalesforceActivity {
 
                     }
                 });
-
+                */
             }
             else {
                 //NOTHING TO SEARCH

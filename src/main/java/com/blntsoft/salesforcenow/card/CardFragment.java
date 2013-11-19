@@ -26,18 +26,24 @@ public abstract class CardFragment extends Fragment {
 
     protected RestClient restClient;
     protected ListView listView;
+    protected String soql;
+    protected String sosl;
 
-    protected abstract String getSoql();
     protected abstract ArrayAdapter getArrayAdapter();
 
     public void onResume(RestClient restClient) {
         this.restClient = restClient;
 
-        String soql = getSoql();
         Log.d(SalesforceNowApp.LOG_TAG, soql);
 
         try {
-            RestRequest restRequest = RestRequest.getRequestForQuery(getString(R.string.api_version), soql);
+            RestRequest restRequest;
+            if (sosl != null) {
+                restRequest = RestRequest.getRequestForSearch(getString(R.string.api_version), sosl);
+            }
+            else {
+                restRequest = RestRequest.getRequestForQuery(getString(R.string.api_version), soql);
+            }
             restClient.sendAsync(restRequest, new RestClient.AsyncRequestCallback() {
                 @Override
                 public void onSuccess(RestRequest request, RestResponse result) {
@@ -63,5 +69,19 @@ public abstract class CardFragment extends Fragment {
         }
     }
 
+    public String getSoql() {
+        return soql;
+    }
 
+    public void setSoql(String soql) {
+        this.soql = soql;
+    }
+
+    public String getSosl() {
+        return sosl;
+    }
+
+    public void setSosl(String sosl) {
+        this.sosl = sosl;
+    }
 }

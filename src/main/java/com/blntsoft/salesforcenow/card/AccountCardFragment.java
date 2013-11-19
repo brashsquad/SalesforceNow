@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.blntsoft.salesforcenow.R;
 import com.blntsoft.salesforcenow.SalesforceNowApp;
+import com.blntsoft.salesforcenow.adapter.AccountAdapter;
 import com.salesforce.androidsdk.app.SalesforceSDKManager;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.rest.RestRequest;
@@ -29,7 +30,11 @@ import java.util.ArrayList;
 public class AccountCardFragment
         extends CardFragment {
 
-    private ArrayAdapter<String> listAdapter;
+    private ArrayAdapter<JSONObject> listAdapter;
+
+    public AccountCardFragment() {
+        soql = "SELECT Id, Name, Type FROM Account ORDER BY LastModifiedDate DESC LIMIT 5";
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -39,15 +44,10 @@ public class AccountCardFragment
 
     @Override
     public void onResume() {
-        listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<String>());
+        listAdapter = new AccountAdapter(getActivity());
         listView.setAdapter(listAdapter);
 
         super.onResume();
-    }
-
-    @Override
-    protected String getSoql() {
-        return "SELECT Id, Name FROM Account ORDER BY LastModifiedDate DESC LIMIT 5";
     }
 
     @Override

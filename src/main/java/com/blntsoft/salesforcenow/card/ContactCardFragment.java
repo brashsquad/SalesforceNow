@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.blntsoft.salesforcenow.R;
 import com.blntsoft.salesforcenow.SalesforceNowApp;
+import com.blntsoft.salesforcenow.adapter.ContactAdapter;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.rest.RestRequest;
 import com.salesforce.androidsdk.rest.RestResponse;
@@ -27,7 +28,11 @@ import java.util.ArrayList;
 public class ContactCardFragment
         extends CardFragment {
 
-    private ArrayAdapter<String> listAdapter;
+    private ArrayAdapter<JSONObject> listAdapter;
+
+    public ContactCardFragment() {
+        soql = "SELECT Id, Name, Phone FROM Contact ORDER BY LastModifiedDate DESC LIMIT 5";
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,15 +42,10 @@ public class ContactCardFragment
 
     @Override
     public void onResume() {
-        listAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, new ArrayList<String>());
+        listAdapter = new ContactAdapter(getActivity());
         listView.setAdapter(listAdapter);
 
         super.onResume();
-    }
-
-    @Override
-    protected String getSoql() {
-        return "SELECT Id, Name FROM Contact ORDER BY LastModifiedDate DESC LIMIT 5";
     }
 
     @Override
