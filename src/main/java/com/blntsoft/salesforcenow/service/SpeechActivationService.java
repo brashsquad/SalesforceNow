@@ -186,13 +186,6 @@ public class SpeechActivationService extends Service implements
         // make sure the activator is stopped before doing anything else
         stopActivator();
 
-        // broadcast result
-        /*Intent intent = new Intent(ACTIVATION_RESULT_BROADCAST_NAME);
-        intent.putExtra(ACTIVATION_RESULT_INTENT_KEY, success);
-        sendBroadcast(intent);
-*/
-        Log.d(TAG, "Bonjour !");
-
         Intent searchIntent = new Intent(this, SearchActivity.class);
         searchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(searchIntent);
