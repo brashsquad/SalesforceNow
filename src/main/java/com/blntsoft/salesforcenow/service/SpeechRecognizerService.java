@@ -84,7 +84,6 @@ public class SpeechRecognizerService extends Service
         }
     }
 
-
     /*
      * Inner class
      */

@@ -62,7 +62,6 @@ public class MainActivity2 extends SalesforceActivity {
         super.onResume();
     }
 
-    private SpeechRecognizerService speechRecognizerService;
     @Override
     public void onResume(RestClient client) {
         // Keeping reference to rest client
@@ -70,14 +69,6 @@ public class MainActivity2 extends SalesforceActivity {
 
         // Show everything
         rootView.setVisibility(View.VISIBLE);
-
-        startService(new Intent(this, SpeechRecognizerService.class));
-    }
-
-    @Override
-    public void onPause() {
-        stopService(new Intent(this, SpeechRecognizerService.class));
-        super.onPause();
     }
 
     /**
@@ -88,15 +79,19 @@ public class MainActivity2 extends SalesforceActivity {
     {
         if (requestCode == VOICE_EVENT_ID
                 && resultCode == RESULT_OK) {
-            // Populate the wordsList with the String values the recognition engine thought it heard
-            ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            final String queryString = matches.get(0);
+            final ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(MainActivity2.this, queryString, Toast.LENGTH_LONG).show();
+                    for (String s : matches) {
+                        Toast.makeText(MainActivity2.this, s, Toast.LENGTH_SHORT).show();
+                    }
                 }
             });
+
+            Intent searchIntent = new Intent(this, SearchActivity.class);
+            searchIntent.putExtra(SearchActivity.SEARCH_STRING_EXTRA, matches.get(0));
+            startActivity(searchIntent);
         }
         super.onActivityResult(requestCode, resultCode, data);
     }

@@ -28,9 +28,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".SearchActivity" />
         <service
-            android:name="root.gast.speech.activation.SpeechActivationService"
+            android:name=".service.SpeechActivationService"
             android:enabled="true"
             >
         </service>

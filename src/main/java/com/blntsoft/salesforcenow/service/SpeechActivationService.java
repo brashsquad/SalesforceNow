@@ -25,6 +25,8 @@ import android.os.IBinder;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.blntsoft.salesforcenow.SalesforceNowApp;
+
 import root.gast.speech.activation.SpeechActivationListener;
 import root.gast.speech.activation.SpeechActivator;
 import root.gast.speech.activation.WordActivator;
@@ -39,7 +41,8 @@ import root.gast.speech.activation.WordActivator;
 public class SpeechActivationService extends Service implements
         SpeechActivationListener
 {
-    private static final String TAG = "SpeechActivationService";
+    private static final String TAG = SalesforceNowApp.LOG_TAG;
+
     public static final String NOTIFICATION_ICON_RESOURCE_INTENT_KEY =
             "NOTIFICATION_ICON_RESOURCE_INTENT_KEY";
     public static final String ACTIVATION_TYPE_INTENT_KEY =
@@ -140,7 +143,7 @@ public class SpeechActivationService extends Service implements
         Log.d(TAG, "started: " + activator.getClass().getSimpleName());
         isStarted = true;
         activator.detectActivation();
-        startForeground(NOTIFICATION_ID, getNotification(intent));
+        //startForeground(NOTIFICATION_ID, getNotification(intent));
     }
 
     private SpeechActivator getRequestedActivator(Intent intent)

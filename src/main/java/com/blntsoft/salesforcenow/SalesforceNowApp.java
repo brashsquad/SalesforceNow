@@ -35,7 +35,7 @@ import com.salesforce.androidsdk.app.SalesforceSDKManager;
  */
 public class SalesforceNowApp extends Application {
 
-    public static final String LOG_TAG = "SFDCAdmin";
+    public static final String LOG_TAG = "SalesForceNow";
 
 	@Override
 	public void onCreate() {
