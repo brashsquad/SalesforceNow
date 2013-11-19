@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/account_name"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:text="Account Name"/>
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:text="Category"
+        android:layout_below="@+id/account_name"
+        android:layout_alignParentLeft="true"
+        android:id="@+id/textView" />
+
+    <ImageView
+        android:id="@+id/account_map"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_7_location_map"
+        android:layout_toLeftOf="@+id/account_web" />
+
+    <ImageView
+        android:id="@+id/account_web"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_7_location_web_site"
+        android:layout_toLeftOf="@+id/account_email" />
+
+    <ImageView
+        android:id="@+id/account_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_5_content_email"
+        android:layout_toLeftOf="@+id/account_text" />
+
+    <ImageView
+        android:id="@+id/account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_6_social_chat"
+        android:layout_toLeftOf="@+id/account_call" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/account_call"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/ic_10_device_access_call"/>
+
+</RelativeLayout>
