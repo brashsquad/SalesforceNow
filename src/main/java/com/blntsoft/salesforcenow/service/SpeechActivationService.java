@@ -16,16 +16,15 @@
 package com.blntsoft.salesforcenow.service;
 
 import android.app.Notification;
-import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.os.IBinder;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.blntsoft.salesforcenow.SalesforceNowApp;
+import com.blntsoft.salesforcenow.SearchActivity;
+import com.blntsoft.salesforcenow.SearchResultActivity;
 
 import root.gast.speech.activation.SpeechActivationListener;
 import root.gast.speech.activation.SpeechActivator;
@@ -189,6 +188,11 @@ public class SpeechActivationService extends Service implements
         sendBroadcast(intent);
 */
         Log.d(TAG, "Bonjour !");
+
+        Intent searchIntent = new Intent(this, SearchActivity.class);
+        searchIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(searchIntent);
+
         // always stop after receive an activation
         stopSelf();
     }
