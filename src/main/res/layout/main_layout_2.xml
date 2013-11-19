@@ -5,30 +5,47 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/root">
 
-    <EditText
-        android:id="@+id/ok_salesforce_edit_text"
+    <LinearLayout
+        android:id="@+id/salesforce_header"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:hint="@string/ok_salesforce_hint"
-        android:background="#FFFFFF"
-        android:padding="10dp"
+        android:background="@drawable/salesforce_header"
+        android:orientation="horizontal"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
-
-    <Button
-        android:id="@+id/salesforce_now_button"
-        android:onClick="onVoiceButtonClick"
-        android:layout_toRightOf="@+id/ok_salesforce_edit_text"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:background="@android:drawable/ic_btn_speak_now"
         android:layout_centerHorizontal="true"
-        />
+        android:padding="10dp"
+        >
+        <EditText
+            android:id="@+id/ok_salesforce_edit_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:hint="@string/ok_salesforce_hint"
+            android:background="#FFFFFF"
+            android:padding="10dp"
+            android:singleLine="true"
+            android:inputType="textAutoCorrect"
+            android:imeOptions="actionSearch"
+            android:layout_gravity="bottom"
+            />
+        <Button
+            android:id="@+id/salesforce_now_button"
+            android:onClick="onVoiceButtonClick"
+            android:layout_toRightOf="@+id/ok_salesforce_edit_text"
+            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:background="@drawable/ic_10_device_access_mic"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="bottom"
+            >
+            <requestFocus />
+        </Button>
+    </LinearLayout>
 
+    <!--
     <Button
         android:id="@+id/new_button"
         android:onClick="onNewButtonClick"
-        android:layout_below="@+id/ok_salesforce_edit_text"
+        android:layout_below="@+id/salesforce_header"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="New"
@@ -44,11 +61,12 @@
         android:text="View"
         android:visibility="gone"
         />
+    -->
 
     <ScrollView
         android:layout_height="fill_parent"
         android:layout_width="fill_parent"
-        android:layout_below="@+id/ok_salesforce_edit_text"
+        android:layout_below="@+id/salesforce_header"
         android:background="#ffffff">
 
         <LinearLayout
@@ -63,7 +81,7 @@
             android:id="@+id/account_card_fragment"
             android:layout_width="fill_parent"
             android:layout_height="250dp"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:name="com.blntsoft.salesforcenow.card.AccountCardFragment"
             tools:layout="@layout/account_card_fragment"
             android:tag="com.blntsoft.salesforcenow.card.AccountCardFragment"
@@ -72,7 +90,7 @@
 
         <fragment
             android:id="@+id/contact_card_fragment"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:layout_width="fill_parent"
             android:layout_height="250dp"
             android:name="com.blntsoft.salesforcenow.card.ContactCardFragment"
@@ -82,7 +100,7 @@
 
         <fragment
             android:id="@+id/opportunity_card_fragment"
-            android:layout_margin="10dp"
+            android:layout_margin="20dp"
             android:layout_width="fill_parent"
             android:layout_height="250dp"
             android:name="com.blntsoft.salesforcenow.card.OpportunityCardFragment"

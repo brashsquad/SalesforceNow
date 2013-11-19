@@ -6,7 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blntsoft.salesforcenow.card.AccountCardFragment;
@@ -39,6 +43,7 @@ public class MainActivity2 extends SalesforceActivity {
 
     private RestClient client;
     private View rootView;
+    private EditText searchText;
 
     /*
      * Activity
@@ -50,7 +55,23 @@ public class MainActivity2 extends SalesforceActivity {
 
         setContentView(R.layout.main_layout_2);
 
+        getActionBar().hide();
+
         rootView = findViewById(R.id.root);
+        searchText = (EditText)findViewById(R.id.ok_salesforce_edit_text);
+        searchText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    Intent intent = new Intent(MainActivity2.this, SearchActivity.class);
+                    intent.putExtra(SearchActivity.SEARCH_QUERY_EXTRA, searchText.getText().toString());
+                    startActivity(intent);
+                    handled = true;
+                }
+                return handled;
+            }
+        });
     }
 
     @Override
