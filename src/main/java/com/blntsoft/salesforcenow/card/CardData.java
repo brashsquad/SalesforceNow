@@ -2,12 +2,13 @@ package com.blntsoft.salesforcenow.card;
 
 import android.content.Context;
 
-import com.orm.SugarRecord;
+//import com.orm.SugarRecord;
 
 /**
  * Created by baolongnt on 11/19/13.
  */
-public class CardData extends SugarRecord<CardData> {
+public class CardData {
+    //extends SugarRecord<CardData> {
 
     public String name;
     public String value;
