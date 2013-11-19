@@ -65,63 +65,54 @@ public class SearchResultActivity extends SalesforceActivity {
         rootView.setVisibility(View.VISIBLE);
 
         try {
-            Intent i = getIntent();
-            String searchString = i.getStringExtra(SEARCH_STRING_EXTRA);
-            ArrayList<String> searchScopeList = i.getStringArrayListExtra(SEARCH_SCOPE_EXTRA);
+
+            Intent intent = getIntent();
+            String searchString = intent.getStringExtra(SEARCH_STRING_EXTRA);
+            ArrayList<String> searchScopeList = intent.getStringArrayListExtra(SEARCH_SCOPE_EXTRA);
 
             if (searchString != null && !searchString.equals("")) {
-                String sosl = getSearchSOSL(searchString, searchScopeList);
 
+                String sosl = getSearchSOSL(searchString, searchScopeList);
                 Log.d(TAG, "SOSL: " + sosl);
 
-                final Map<String, String> nameById = new HashMap<String, String>();
-                RestRequest request = RestRequest.getRequestForSearch("v29.0", sosl);
-                client.sendAsync(request, new RestClient.AsyncRequestCallback() {
+                ArrayList<String> result = new ArrayList<String>();
+                final RestRequest request = RestRequest.getRequestForSearch("v29.0", sosl);
 
+                client.sendAsync(request, new RestClient.AsyncRequestCallback() {
                     @Override
                     public void onSuccess(RestRequest request, RestResponse response) {
                         try {
 
-                            JSONArray result = response.asJSONArray();
-                            Log.d(TAG, "Count Result: " + result.length());
-                            ArrayList<String> resultList = new ArrayList<String>();
-                            if (result.length() > 0) {
-                                for (int i = 0; i < result.length(); i++) {
-                                    JSONObject object = result.getJSONObject(i);
-                                    String id = object.getString("Id");
-                                    String name = object.getString("Name");
-                                    Log.d(TAG, "Id: " + id);
-                                    Log.d(TAG, "Name: " + name);
-                                    resultList.add(name);
-                                    /*JSONObject a = object.geeById.put(idtJSONObject("attributes");
-                                    for (Iterator j = a.keys(); j.hasNext();) {
-                                        String key = j.next().toString();
-                                        String value = object.getString(key);
-                                        Log.d(TAG, key + " : " + value);
-                                    }*/
+                            JSONArray jsonResult = response.asJSONArray();
+                            List<String> nameList = new ArrayList<String>();
+                            Log.d("AsyncSOSLRequestCallback", "Count: " + jsonResult.length());
+                            if (jsonResult.length() > 0) {
+                                for (int i = 0; i < jsonResult.length(); i++) {
+                                    JSONObject jsonObject = jsonResult.getJSONObject(i);
+                                    String id = jsonObject.getString("Id");
+                                    String name = jsonObject.getString("Name");
+                                    nameList.add(name);
                                 }
-                            } else resultList.add("No result found !");
+                            } else nameList.add("No result found !");
 
                             ListView l = (ListView) findViewById(R.id.listView);
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchResultActivity.this, android.R.layout.simple_list_item_1, resultList.toArray(new String[0]));
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchResultActivity.this, android.R.layout.simple_list_item_1, nameList.toArray(new String[0]));
                             l.setAdapter(adapter);
 
                         } catch (JSONException e) {
-                            Log.e(TAG, null, e);
+                            Log.e("AsyncSOSLRequestCallback", null, e);
                         } catch (IOException e) {
-                            Log.e(TAG, null, e);
+                            Log.e("AsyncSOSLRequestCallback", null, e);
                         }
+
                     }
 
                     @Override
                     public void onError(Exception exception) {
-                        Log.d(TAG, "Error");
+
                     }
                 });
 
-                if (nameById.size() > 0) {
-                    Log.d(TAG, "MAP has " + nameById.size());
-                } else Log.d(TAG, "MAP has " + nameById.size());
             }
             else {
                 //NOTHING TO SEARCH
