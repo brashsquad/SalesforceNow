@@ -30,14 +30,17 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".SearchActivity" />
-        <activity android:name=".SearchResultActivity" />
+        <activity
+            android:name=".SearchActivity"
+            />
+        <activity
+            android:name=".SearchResultActivity"
+            />
+
         <service
             android:name=".service.SpeechActivationService"
             android:enabled="true"
-            >
-        </service>
-
+            />
     </application>
 
     <!--
