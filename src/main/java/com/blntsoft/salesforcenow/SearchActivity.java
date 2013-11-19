@@ -23,6 +23,15 @@ public class SearchActivity extends Activity {
 
     private static final int VOICE_EVENT_ID             = 1;
 
+    private static ArrayList<String> types;
+
+    static {
+        types = new ArrayList<String>();
+        types.add("account");
+        types.add("contact");
+        types.add("opportunity");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +51,7 @@ public class SearchActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (requestCode == VOICE_EVENT_ID
-                && resultCode == RESULT_OK) {
+            && resultCode == RESULT_OK) {
             final ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
             /*runOnUiThread(new Runnable() {
                 @Override
@@ -65,7 +74,21 @@ public class SearchActivity extends Activity {
 
                 StringBuilder searchString = new StringBuilder();
                 ArrayList<String> searchScopeList = new ArrayList<String>();
-                if (wordList.contains("in")) {
+
+                Log.d("SearchActivity", "WordList: " + wordList);
+
+                for (int i = 1; i < wordList.size(); i++) {
+                    String word = wordList.get(i);
+                    if (this.types.contains(word.toLowerCase())) {
+                        searchScopeList.add(word);
+                    } else searchString.append(word).append(" ");
+                }
+
+                if (searchScopeList.size() == 0) {
+                    searchScopeList = this.types;
+                }
+
+                /*if (wordList.contains("in")) {
                     Log.d("SearchActivity", "SearchIn");
                     int index = wordList.indexOf("in");
                     for (int i = 1; i < index; i++) {  // skip command word
@@ -87,15 +110,18 @@ public class SearchActivity extends Activity {
                     for (int i = 1; i < wordList.size(); i++) { // skip command word
                         searchString.append(wordList.get(i)).append(" ");
                     }
-                }
+                }*/
 
-                Log.d("SearchActivity", "searchString: " + searchString.toString().trim());
+                String searchStr = searchString.toString().trim();
+                Log.d("SearchActivity", "searchString: " + searchStr);
                 Log.d("SearchActivity", "searchScope: " + searchScopeList.toString());
 
-                Intent searchIntent = new Intent(this, SearchResultActivity.class);
-                searchIntent.putExtra(SearchResultActivity.SEARCH_STRING_EXTRA, searchString.toString().trim());
-                searchIntent.putExtra(SearchResultActivity.SEARCH_SCOPE_EXTRA, searchScopeList);
-                startActivity(searchIntent);
+                if (!searchStr.equals("")) {
+                    Intent searchIntent = new Intent(this, SearchResultActivity.class);
+                    searchIntent.putExtra(SearchResultActivity.SEARCH_STRING_EXTRA, searchStr);
+                    searchIntent.putExtra(SearchResultActivity.SEARCH_SCOPE_EXTRA, searchScopeList);
+                    startActivity(searchIntent);
+                }
             }
 
             //TODO: If "New xxx" launch Salesforce1 instead of our SOSL search screen
