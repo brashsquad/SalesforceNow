@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -23,13 +24,15 @@ public class SearchActivity extends Activity {
 
     private static final int VOICE_EVENT_ID             = 1;
 
-    private static ArrayList<String> types;
+    private static HashMap<String,String> fieldsCsvByType;
 
     static {
-        types = new ArrayList<String>();
-        types.add("account");
-        types.add("contact");
-        types.add("opportunity");
+
+        fieldsCsvByType = new HashMap<String, String>();
+        fieldsCsvByType.put("account", "id,name,type");
+        fieldsCsvByType.put("contact", "id,name");
+        fieldsCsvByType.put("opportunity", "id,name");
+
     }
 
     @Override
@@ -74,18 +77,21 @@ public class SearchActivity extends Activity {
 
                 StringBuilder searchString = new StringBuilder();
                 ArrayList<String> searchScopeList = new ArrayList<String>();
+                ArrayList<String> searchFieldsList = new ArrayList<String>();
 
                 Log.d("SearchActivity", "WordList: " + wordList);
 
                 for (int i = 1; i < wordList.size(); i++) {
                     String word = wordList.get(i);
-                    if (this.types.contains(word.toLowerCase())) {
+                    if (this.fieldsCsvByType.containsKey(word.toLowerCase())) {
                         searchScopeList.add(word);
+                        searchFieldsList.add(fieldsCsvByType.get(word));
                     } else searchString.append(word).append(" ");
                 }
 
                 if (searchScopeList.size() == 0) {
-                    searchScopeList = this.types;
+                    searchScopeList = new ArrayList<String>(this.fieldsCsvByType.keySet());
+                    searchFieldsList = new ArrayList<String>(this.fieldsCsvByType.values());
                 }
 
                 /*if (wordList.contains("in")) {
@@ -115,11 +121,13 @@ public class SearchActivity extends Activity {
                 String searchStr = searchString.toString().trim();
                 Log.d("SearchActivity", "searchString: " + searchStr);
                 Log.d("SearchActivity", "searchScope: " + searchScopeList.toString());
+                Log.d("SearchActivity", "searchField: " + searchFieldsList.toString());
 
                 if (!searchStr.equals("")) {
                     Intent searchIntent = new Intent(this, SearchResultActivity.class);
                     searchIntent.putExtra(SearchResultActivity.SEARCH_STRING_EXTRA, searchStr);
                     searchIntent.putExtra(SearchResultActivity.SEARCH_SCOPE_EXTRA, searchScopeList);
+                    searchIntent.putExtra(SearchResultActivity.SEARCH_FIELDS_EXTRA, searchFieldsList);
                     startActivity(searchIntent);
                 }
             }

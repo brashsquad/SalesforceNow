@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.blntsoft.salesforcenow.adapter.AccountAdapter;
 import com.blntsoft.salesforcenow.service.SpeechRecognizerService;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.rest.RestRequest;
@@ -31,6 +32,7 @@ public class SearchResultActivity extends SalesforceActivity {
 
     public static String SEARCH_STRING_EXTRA = "Search String";
     public static String SEARCH_SCOPE_EXTRA = "Search Scope";
+    public static String SEARCH_FIELDS_EXTRA = "Search Fields";
 
     private static final int LIMIT = 20;
 
@@ -69,13 +71,13 @@ public class SearchResultActivity extends SalesforceActivity {
             Intent intent = getIntent();
             String searchString = intent.getStringExtra(SEARCH_STRING_EXTRA);
             ArrayList<String> searchScopeList = intent.getStringArrayListExtra(SEARCH_SCOPE_EXTRA);
+            ArrayList<String> searchFieldsCsv = intent.getStringArrayListExtra(SEARCH_FIELDS_EXTRA);
 
             if (searchString != null && !searchString.equals("")) {
 
-                String sosl = getSearchSOSL(searchString, searchScopeList);
+                String sosl = getSearchSOSL(searchString, searchScopeList, searchFieldsCsv);
                 Log.d(TAG, "SOSL: " + sosl);
 
-                ArrayList<String> result = new ArrayList<String>();
                 final RestRequest request = RestRequest.getRequestForSearch("v29.0", sosl);
 
                 client.sendAsync(request, new RestClient.AsyncRequestCallback() {
@@ -84,20 +86,20 @@ public class SearchResultActivity extends SalesforceActivity {
                         try {
 
                             JSONArray jsonResult = response.asJSONArray();
-                            List<String> nameList = new ArrayList<String>();
+                            List<JSONObject> jsonObjectList = new ArrayList<JSONObject>();
                             Log.d("AsyncSOSLRequestCallback", "Count: " + jsonResult.length());
                             if (jsonResult.length() > 0) {
                                 for (int i = 0; i < jsonResult.length(); i++) {
-                                    JSONObject jsonObject = jsonResult.getJSONObject(i);
-                                    String id = jsonObject.getString("Id");
-                                    String name = jsonObject.getString("Name");
-                                    nameList.add(name);
+                                    jsonObjectList.add(jsonResult.getJSONObject(i));
                                 }
-                            } else nameList.add("No result found !");
+                            }
 
-                            ListView l = (ListView) findViewById(R.id.listView);
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(SearchResultActivity.this, android.R.layout.simple_list_item_1, nameList.toArray(new String[0]));
-                            l.setAdapter(adapter);
+                            AccountAdapter adapter = new AccountAdapter(SearchResultActivity.this);
+                            adapter.addAll(jsonObjectList);
+
+                            // Attach the adapter to a ListView
+                            ListView listView = (ListView) findViewById(R.id.listView);
+                            listView.setAdapter(adapter);
 
                         } catch (JSONException e) {
                             Log.e("AsyncSOSLRequestCallback", null, e);
@@ -125,17 +127,14 @@ public class SearchResultActivity extends SalesforceActivity {
 
     }
 
-    private String getSearchAllSOSL(String searchString) {
-        return this.getSearchSOSL(searchString, null);
-    }
-
-    private String getSearchSOSL(String searchString, ArrayList<String> searchScopeList) {
+    private String getSearchSOSL(String searchString, ArrayList<String> searchScopeList, ArrayList<String> fieldsCsv) {
         StringBuilder sosl = new StringBuilder();
         sosl.append("FIND {*").append(searchString).append("*} IN ALL FIELDS ");
         if (searchScopeList.size() > 0) {
             sosl.append("RETURNING ");
+
             for (int i = 0; i < searchScopeList.size(); i++) {
-                sosl.append(searchScopeList.get(i)).append("(id,name)");
+                sosl.append(searchScopeList.get(i)).append("(").append(fieldsCsv.get(i)).append(")");
                 if (i != searchScopeList.size() - 1) {
                     sosl.append(", ");
                 } else sosl.append(" ");
