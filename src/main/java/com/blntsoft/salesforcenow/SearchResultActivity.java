@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.blntsoft.salesforcenow.adapter.AccountAdapter;
+import com.blntsoft.salesforcenow.adapter.ContactAdapter;
+import com.blntsoft.salesforcenow.adapter.OpportunityAdapter;
 import com.blntsoft.salesforcenow.service.SpeechRecognizerService;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.rest.RestRequest;
@@ -94,7 +96,9 @@ public class SearchResultActivity extends SalesforceActivity {
                                 }
                             }
 
-                            AccountAdapter adapter = new AccountAdapter(SearchResultActivity.this);
+                            //AccountAdapter adapter = new AccountAdapter(SearchResultActivity.this);
+                            //ContactAdapter adapter = new ContactAdapter(SearchResultActivity.this);
+                            OpportunityAdapter adapter = new OpportunityAdapter(SearchResultActivity.this);
                             adapter.addAll(jsonObjectList);
 
                             // Attach the adapter to a ListView
