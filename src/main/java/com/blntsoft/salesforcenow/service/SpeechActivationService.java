@@ -19,6 +19,7 @@ import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.IBinder;
 import android.util.Log;
 
@@ -138,6 +139,9 @@ public class SpeechActivationService extends Service implements
             Log.d(TAG, "null activator");
         }
 
+        AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+
         activator = getRequestedActivator(intent);
         Log.d(TAG, "started: " + activator.getClass().getSimpleName());
         isStarted = true;
@@ -202,6 +206,10 @@ public class SpeechActivationService extends Service implements
     {
         Log.d(TAG, "On destroy");
         super.onDestroy();
+
+        AudioManager audioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamMute(AudioManager.STREAM_SYSTEM, false);
+
         stopActivator();
         stopForeground(true);
     }
