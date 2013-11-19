@@ -52,9 +52,10 @@ public class SearchActivity extends Activity {
             Intent searchIntent = new Intent(this, SearchResultActivity.class);
             searchIntent.putExtra(SearchResultActivity.SEARCH_STRING_EXTRA, matches.get(0));
             startActivity(searchIntent);
-
-            finish();
         }
+
+        finish();
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
