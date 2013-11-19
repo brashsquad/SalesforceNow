@@ -29,7 +29,9 @@ import java.util.Map;
  */
 public class SearchResultActivity extends SalesforceActivity {
 
-    public static String SEARCH_STRING_EXTRA    = "Search String";
+    public static String SEARCH_STRING_EXTRA = "Search String";
+    public static String SEARCH_SCOPE_EXTRA = "Search Scope";
+
     private static final int LIMIT = 20;
 
     private static final String TAG = "SearchResultActivity";
@@ -65,10 +67,10 @@ public class SearchResultActivity extends SalesforceActivity {
         try {
             Intent i = getIntent();
             String searchString = i.getStringExtra(SEARCH_STRING_EXTRA);
+            String searchScope = i.getStringExtra(SEARCH_SCOPE_EXTRA);
 
-            if (searchString != null
-                        && !searchString.equals("")) {
-                String sosl = getSOSL(searchString);
+            if (searchString != null && !searchString.equals("")) {
+                String sosl = getSearchSOSL(searchString, searchScope);
 
                 Log.d(TAG, "SOSL: " + sosl);
 
@@ -132,11 +134,18 @@ public class SearchResultActivity extends SalesforceActivity {
 
     }
 
-    private String getSOSL(String searchString) {
-        return "FIND {*" + searchString + "*} " +
-               "IN ALL FIELDS " +
-               "RETURNING Account (id,name) " +
-               "LIMIT " + LIMIT;
+    private String getSearchAllSOSL(String searchString) {
+        return this.getSearchSOSL(searchString, null);
+    }
+
+    private String getSearchSOSL(String searchString, String searchScope) {
+        StringBuilder sosl = new StringBuilder();
+        sosl.append("FIND {*").append(searchString).append("*} IN ALL FIELDS ");
+        if (searchScope != null && !searchScope.equals("")) {
+            sosl.append("RETURNING ").append(searchScope).append("(id,name) ");
+        }
+        sosl.append("LIMIT ").append(LIMIT);
+        return sosl.toString();
     }
 
 

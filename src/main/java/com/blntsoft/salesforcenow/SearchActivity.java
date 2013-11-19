@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by baolongnt on 11/18/13.
@@ -41,14 +44,56 @@ public class SearchActivity extends Activity {
         if (requestCode == VOICE_EVENT_ID
                 && resultCode == RESULT_OK) {
             final ArrayList<String> matches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-            runOnUiThread(new Runnable() {
+            /*runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     for (String s : matches) {
                         Toast.makeText(SearchActivity.this, s, Toast.LENGTH_SHORT).show();
                     }
                 }
-            });
+            });*/
+
+            String voiceResult = matches.get(0);
+            List<String> wordList = Arrays.asList(voiceResult.split(" "));
+
+            String command = wordList.get(0);
+            if (command.equals("open")) {
+                Toast.makeText(SearchActivity.this, command, Toast.LENGTH_SHORT).show();
+            } else if (command.equals("new")) {
+                Toast.makeText(SearchActivity.this, command, Toast.LENGTH_SHORT).show();
+            } else { //search
+
+                StringBuilder searchString = new StringBuilder();
+                StringBuilder searchScope = new StringBuilder();
+                if (wordList.contains("in")) {
+                    Log.d("SearchActivity", "SearchIn");
+                    int index = wordList.indexOf("in");
+                    for (int i = 1; i < index; i++) {  // skip command word
+                        searchString.append(wordList.get(i)).append(" ");
+                    }
+
+                    //"In" keyword should not be the last element
+                    if (index < wordList.size()) {
+                        for (int i = index + 1; i < wordList.size(); i++) {
+                            searchScope.append(wordList.get(i)).append(" ");
+                        }
+                    }
+
+                } else {
+                    Log.d("SearchActivity", "SearchAll");
+                    for (int i = 1; i < wordList.size(); i++) { // skip command word
+                        searchString.append(wordList.get(i)).append(" ");
+                    }
+                }
+
+                Log.d("SearchActivity", "searchString: " + searchString.toString().trim());
+                Log.d("SearchActivity", "searchScope: " + searchScope.toString().trim());
+
+                Intent searchIntent = new Intent(this, SearchResultActivity.class);
+                searchIntent.putExtra(SearchResultActivity.SEARCH_STRING_EXTRA, searchString.toString().trim());
+                searchIntent.putExtra(SearchResultActivity.SEARCH_SCOPE_EXTRA, searchScope.toString().trim());
+                startActivity(searchIntent);
+            }
 
             //TODO: If "New xxx" launch Salesforce1 instead of our SOSL search screen
             //but Salesforce1 does not like 'new' URLs
@@ -64,9 +109,6 @@ public class SearchActivity extends Activity {
             startActivity(i);
             */
 
-            Intent searchIntent = new Intent(this, SearchResultActivity.class);
-            searchIntent.putExtra(SearchResultActivity.SEARCH_STRING_EXTRA, matches.get(0));
-            startActivity(searchIntent);
         }
 
         finish();
