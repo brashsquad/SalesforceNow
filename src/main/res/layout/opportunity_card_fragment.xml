@@ -11,14 +11,15 @@
         android:layout_width="35dp"
         android:src="@drawable/stageleft_opportunity"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp" />
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:text="@string/opportunities"
         android:layout_toRightOf="@+id/opportunity_logo"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"/>
 
     <ListView
