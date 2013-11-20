@@ -86,7 +86,7 @@ public class SearchActivity extends Activity {
     private void processQuery(String query) {
         Log.d(SalesforceNowApp.LOG_TAG, query);
 
-        List<String> wordList = Arrays.asList(query);
+        List<String> wordList = Arrays.asList(query.split(" "));
 
         String command = wordList.get(0);
         if (command.equals("open")) {

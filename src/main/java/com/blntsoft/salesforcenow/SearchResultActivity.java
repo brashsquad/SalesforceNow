@@ -73,25 +73,59 @@ public class SearchResultActivity extends SalesforceActivity {
 
         // Show everything
         rootView.setVisibility(View.VISIBLE);
+
+        Intent intent = getIntent();
+        String searchString = intent.getStringExtra(SEARCH_STRING_EXTRA);
+        ArrayList<String> searchScopeList = intent.getStringArrayListExtra(SEARCH_SCOPE_EXTRA);
+        ArrayList<String> searchFieldsCsv = intent.getStringArrayListExtra(SEARCH_FIELDS_EXTRA);
+
+        if (searchString != null && !searchString.equals("")) {
+
+            HashMap<String,String> tagByType = new HashMap<String, String>();
+            tagByType.put("account", AccountCardFragment.class.getName());
+            tagByType.put("contact", ContactCardFragment.class.getName());
+            tagByType.put("opportunity", OpportunityCardFragment.class.getName());
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction trx = fragmentManager.beginTransaction();
+
+            ArrayList<String> registeredFragment = new ArrayList<String>();
+             for (int i = 0; i < searchScopeList.size(); i++) {
+                String scope = searchScopeList.get(i);
+                String fields = searchFieldsCsv.get(i);
+                String sosl = getSearchSOSL(searchString, scope, fields);
+                Log.d("SOSL", "SOSL: " + sosl);
+
+                CardFragment cardFragment = (CardFragment)fragmentManager.findFragmentByTag(tagByType.get(scope));
+                cardFragment.setSosl(sosl);
+                cardFragment.onResume(client);
+
+                registeredFragment.add(scope);
+            }
+
+            for (String type : tagByType.keySet()) {
+                if (!registeredFragment.contains(type)) {
+                    CardFragment cardFragment = (CardFragment)fragmentManager.findFragmentByTag(tagByType.get(type));
+                    trx.remove(cardFragment);
+                }
+            }
+
+            trx.commit();
+
+        }
+        else {
+            //NOTHING TO SEARCH
+        }
+
     }
 
-    private String getSearchSOSL(String searchString, ArrayList<String> searchScopeList, ArrayList<String> fieldsCsv) {
+    private String getSearchSOSL(String searchString, String searchScope, String fieldsCsv) {
         StringBuilder sosl = new StringBuilder();
         sosl.append("FIND {*").append(searchString).append("*} IN ALL FIELDS ");
-        if (searchScopeList.size() > 0) {
-            sosl.append("RETURNING ");
-
-            for (int i = 0; i < searchScopeList.size(); i++) {
-                sosl.append(searchScopeList.get(i)).append("(").append(fieldsCsv.get(i)).append(")");
-                if (i != searchScopeList.size() - 1) {
-                    sosl.append(", ");
-                } else sosl.append(" ");
-            }
-        }
+        sosl.append("RETURNING ").append(searchScope).append("(").append(fieldsCsv).append(") ");
         sosl.append("LIMIT ").append(LIMIT);
         return sosl.toString();
     }
-
 
 
 }
