@@ -46,8 +46,8 @@ public class ContactAdapter extends ArrayAdapter<JSONObject> {
 
         // Populate the data into the template view using the data object'
         try {
-            viewHolder.name.setText(object.getString("Name"));
-            viewHolder.phone.setText(object.getString("Phone"));
+            viewHolder.name.setText(!object.isNull("Name") ? object.getString("Name") : "");
+            viewHolder.phone.setText(!object.isNull("Phone") ? object.getString("Phone") : "");
         } catch (JSONException e) {
             Log.e("ContactAdapter", null, e);
         }

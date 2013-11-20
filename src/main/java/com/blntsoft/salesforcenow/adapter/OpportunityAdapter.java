@@ -46,8 +46,8 @@ public class OpportunityAdapter extends ArrayAdapter<JSONObject> {
 
         // Populate the data into the template view using the data object'
         try {
-            viewHolder.name.setText(object.getString("Name"));
-            viewHolder.type.setText(object.getString("Type"));
+            viewHolder.name.setText(!object.isNull("Name") ? object.getString("Name") : "");
+            viewHolder.type.setText(!object.isNull("Type") ? object.getString("Type") : "");
         } catch (JSONException e) {
             Log.e("OpportunityAdapter", null, e);
         }

@@ -26,7 +26,7 @@ import org.json.JSONObject;
 public class AccountAdapter extends ArrayAdapter<JSONObject> {
 
     private static class ViewHolder {
-        TextView name ;
+        TextView name;
         TextView type;
         ImageView map;
         ImageView web;
@@ -59,8 +59,9 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
 
         // Populate the data into the template view using the data object'
         try {
-            viewHolder.name.setText(object.getString("Name"));
-            viewHolder.type.setText(object.getString("Type"));
+
+            viewHolder.name.setText(!object.isNull("Name") ? object.getString("Name") : "");
+            viewHolder.type.setText(!object.isNull("Type") ? object.getString("Type") : "");
             viewHolder.map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
