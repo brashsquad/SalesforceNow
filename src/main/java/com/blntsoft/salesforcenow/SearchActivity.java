@@ -2,6 +2,7 @@ package com.blntsoft.salesforcenow;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.speech.RecognizerIntent;
 import android.util.Log;
@@ -25,12 +26,20 @@ public class SearchActivity extends Activity {
     public static final String SEARCH_QUERY_EXTRA      = "Search Query";
 
     public static HashMap<String,String> fieldsCsvByType;
+    public static HashMap<String,String> createUrlByType;
 
     static {
+
         fieldsCsvByType = new HashMap<String, String>();
         fieldsCsvByType.put("account", "id,name,type,industry,website,phone,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStreet");
         fieldsCsvByType.put("contact", "id,name,title,phone,email,Account.Name,MailingCity,MailingCountry,MailingPostalCode,MailingState,MailingStreet");
         fieldsCsvByType.put("opportunity", "id,name,type,Account.Name,StageName,closedate,amount");
+
+        createUrlByType = new HashMap<String, String>();
+        createUrlByType.put("account", "https://na15.salesforce.com/001/e");
+        createUrlByType.put("contact", "https://na15.salesforce.com/003/e");
+        createUrlByType.put("opportunity", "https://na15.salesforce.com/006/e");
+
     }
 
     @Override
@@ -88,10 +97,28 @@ public class SearchActivity extends Activity {
         List<String> wordList = Arrays.asList(query.split(" "));
 
         String command = wordList.get(0);
+
         if (command.equals("open")) {
+
             Toast.makeText(SearchActivity.this, command, Toast.LENGTH_SHORT).show();
+
         } else if (command.equals("new")) {
-            Toast.makeText(SearchActivity.this, command, Toast.LENGTH_SHORT).show();
+
+            String url = null;
+            for (int i = 1; i < wordList.size(); i++) {
+                String word = wordList.get(i);
+                if (createUrlByType.keySet().contains(word)) {
+                    url = createUrlByType.get(word);
+                    break;
+                }
+            }
+
+            if (url != null) {
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(webIntent);
+            }
+
         } else { //search
 
             StringBuilder searchString = new StringBuilder();
