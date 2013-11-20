@@ -33,7 +33,7 @@ public class AccountCardFragment
     private ArrayAdapter<JSONObject> listAdapter;
 
     public AccountCardFragment() {
-        soql = "SELECT Id, Name, Type, Industry, Website, Phone FROM Account ORDER BY LastModifiedDate DESC LIMIT 5";
+        soql = "SELECT Id, Name, Type, Industry, Website, Phone FROM Account ORDER BY LastViewedDate DESC LIMIT 5";
     }
 
     @Override
