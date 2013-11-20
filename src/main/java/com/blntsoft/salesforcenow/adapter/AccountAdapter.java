@@ -61,7 +61,15 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
         try {
 
             viewHolder.name.setText(!object.isNull("Name") ? object.getString("Name") : "");
-            viewHolder.type.setText(!object.isNull("Type") ? object.getString("Type") : "");
+
+            String subtitle;
+            if (object.isNull("Type") || object.isNull("Industry")) {
+                subtitle = (!object.isNull("Type") ? object.getString("Type") : "") + (!object.isNull("Industry") ? object.getString("Industry") : "");
+            } else {
+                subtitle = (!object.isNull("Type") ? object.getString("Type") : "") + " . " + (!object.isNull("Industry") ? object.getString("Industry") : "");
+            }
+
+            viewHolder.type.setText(subtitle);
             viewHolder.map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

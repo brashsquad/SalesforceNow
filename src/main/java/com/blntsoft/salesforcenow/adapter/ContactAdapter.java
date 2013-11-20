@@ -13,6 +13,8 @@ import com.blntsoft.salesforcenow.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Iterator;
+
 /**
  * Created by arnaud on 11/19/13.
  */
@@ -46,8 +48,18 @@ public class ContactAdapter extends ArrayAdapter<JSONObject> {
 
         // Populate the data into the template view using the data object'
         try {
+
+            JSONObject account = object.getJSONObject("Account");
             viewHolder.name.setText(!object.isNull("Name") ? object.getString("Name") : "");
-            viewHolder.phone.setText(!object.isNull("Phone") ? object.getString("Phone") : "");
+
+            String subtitle;
+            if (object.isNull("Title") || account.isNull("Name")) {
+                subtitle = (!object.isNull("Title") ? object.getString("Title") : "") + (!account.isNull("Name") ? account.getString("Name") : "");
+            } else {
+                subtitle = (!object.isNull("Title") ? object.getString("Title") : "") + " . " + (!account.isNull("Name") ? account.getString("Name") : "");
+            }
+
+            viewHolder.phone.setText(subtitle);
         } catch (JSONException e) {
             Log.e("ContactAdapter", null, e);
         }

@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.blntsoft.salesforcenow.R;
+import com.blntsoft.salesforcenow.util.StringUtils;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,8 +47,20 @@ public class OpportunityAdapter extends ArrayAdapter<JSONObject> {
 
         // Populate the data into the template view using the data object'
         try {
+
+            String subtitle;
+            if (object.isNull("StageName") || object.isNull("CloseDate")) {
+                subtitle = (!object.isNull("StageName") ? object.getString("StageName") : "") + (!object.isNull("CloseDate") ? StringUtils.formatDate(object.getString("CloseDate"), "yyyy-mm-dd", "mm/dd/yyyy") : "");
+            } else {
+                subtitle = (!object.isNull("StageName") ? object.getString("StageName") : "") + " . " + (!object.isNull("CloseDate") ? StringUtils.formatDate(object.getString("CloseDate"), "yyyy-mm-dd", "mm/dd/yyyy") : "");
+            }
+
+            if (subtitle.equals("")) {
+                subtitle = (!object.isNull("Amount") ? StringUtils.formatPrice(object.getInt("Amount"), "$") : "");
+            } else subtitle = subtitle + " . " + (!object.isNull("Amount") ? StringUtils.formatPrice(object.getInt("Amount"), "$") : "");
+
             viewHolder.name.setText(!object.isNull("Name") ? object.getString("Name") : "");
-            viewHolder.type.setText(!object.isNull("Type") ? object.getString("Type") : "");
+            viewHolder.type.setText(subtitle);
         } catch (JSONException e) {
             Log.e("OpportunityAdapter", null, e);
         }
