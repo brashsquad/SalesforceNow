@@ -48,7 +48,14 @@ public abstract class CardFragment extends Fragment {
                 @Override
                 public void onSuccess(RestRequest request, RestResponse result) {
                     try {
-                        JSONArray records = result.asJSONObject().getJSONArray("records");
+
+                        JSONArray records = null;
+                        if (sosl != null) {
+                            records = result.asJSONArray();
+                        } else {
+                            records = result.asJSONObject().getJSONArray("records");
+                        }
+
                         for (int i=0; i<records.length(); i++) {
                             JSONObject json = records.getJSONObject(i);
                             getArrayAdapter().add(json);

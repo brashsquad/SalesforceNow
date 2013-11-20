@@ -91,22 +91,26 @@ public class SearchResultActivity extends SalesforceActivity {
 
             ArrayList<String> registeredFragment = new ArrayList<String>();
              for (int i = 0; i < searchScopeList.size(); i++) {
+
                 String scope = searchScopeList.get(i);
                 String fields = searchFieldsCsv.get(i);
                 String sosl = getSearchSOSL(searchString, scope, fields);
                 Log.d("SOSL", "SOSL: " + sosl);
 
                 CardFragment cardFragment = (CardFragment)fragmentManager.findFragmentByTag(tagByType.get(scope));
-                cardFragment.setSosl(sosl);
-                cardFragment.onResume(client);
+                if (cardFragment != null) {
+                    cardFragment.setSosl(sosl);
+                    cardFragment.onResume(client);
 
-                registeredFragment.add(scope);
+                    registeredFragment.add(scope);
+                }
+
             }
 
             for (String type : tagByType.keySet()) {
                 if (!registeredFragment.contains(type)) {
                     CardFragment cardFragment = (CardFragment)fragmentManager.findFragmentByTag(tagByType.get(type));
-                    trx.remove(cardFragment);
+                    if (cardFragment != null) trx.remove(cardFragment);
                 }
             }
 
