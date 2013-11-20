@@ -15,4 +15,5 @@
     <string name="contacts">Contacts</string>
     <string name="opportunities">Opportunities</string>
 
+    <string name="no_result_found">No result found</string>
 </resources>

@@ -1,12 +1,21 @@
 package com.blntsoft.salesforcenow;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
+import com.blntsoft.salesforcenow.card.AccountCardFragment;
+import com.blntsoft.salesforcenow.card.CardFragment;
+import com.blntsoft.salesforcenow.card.ContactCardFragment;
+import com.blntsoft.salesforcenow.card.OpportunityCardFragment;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.ui.sfnative.SalesforceActivity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by baolongnt on 11/18/13.

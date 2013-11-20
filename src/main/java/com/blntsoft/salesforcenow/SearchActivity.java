@@ -51,6 +51,7 @@ public class SearchActivity extends Activity {
         if (searchQuery != null
                 && !"".equals(searchQuery)) {
             processQuery(searchQuery);
+            finish();
         }
         else {
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
@@ -80,6 +81,7 @@ public class SearchActivity extends Activity {
             String voiceResult = matches.get(0);
             processQuery(voiceResult);
         }
+
         finish();
 
         super.onActivityResult(requestCode, resultCode, data);
