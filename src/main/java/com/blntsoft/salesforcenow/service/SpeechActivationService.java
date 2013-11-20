@@ -31,13 +31,6 @@ import root.gast.speech.activation.SpeechActivationListener;
 import root.gast.speech.activation.SpeechActivator;
 import root.gast.speech.activation.WordActivator;
 
-/**
- * Persistently run a speech activator in the background.
- * Use {@link Intent}s to start and stop it
- * @author Greg Milette &#60;<a
- *         href="mailto:gregorym@gmail.com">gregorym@gmail.com</a>&#62;
- *
- */
 public class SpeechActivationService extends Service implements
         SpeechActivationListener
 {
