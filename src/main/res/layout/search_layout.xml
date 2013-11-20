@@ -1,57 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/root">
+    android:background="@color/sf_blue">
 
-    <ScrollView
-        android:layout_height="fill_parent"
-        android:layout_width="fill_parent"
-        android:layout_below="@+id/salesforce_header"
-        android:background="#ffffff">
-
-        <LinearLayout
-            android:layout_height="fill_parent"
-            android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:background="#ffffff"
-            android:showDividers="middle"
-            >
-
-            <fragment
-                android:id="@+id/account_card_fragment"
-                android:layout_width="fill_parent"
-                android:layout_height="250dp"
-                android:layout_margin="20dp"
-                android:name="com.blntsoft.salesforcenow.card.AccountCardFragment"
-                tools:layout="@layout/account_card_fragment"
-                android:tag="com.blntsoft.salesforcenow.card.AccountCardFragment"
-                />
-
-
-            <fragment
-                android:id="@+id/contact_card_fragment"
-                android:layout_margin="20dp"
-                android:layout_width="fill_parent"
-                android:layout_height="250dp"
-                android:name="com.blntsoft.salesforcenow.card.ContactCardFragment"
-                tools:layout="@layout/contact_card_fragment"
-                android:tag="com.blntsoft.salesforcenow.card.ContactCardFragment"
-                />
-
-            <fragment
-                android:id="@+id/opportunity_card_fragment"
-                android:layout_margin="20dp"
-                android:layout_width="fill_parent"
-                android:layout_height="250dp"
-                android:name="com.blntsoft.salesforcenow.card.OpportunityCardFragment"
-                tools:layout="@layout/opportunity_card_fragment"
-                android:tag="com.blntsoft.salesforcenow.card.OpportunityCardFragment"/>
-
-        </LinearLayout>
-
-    </ScrollView>
 </LinearLayout>
