@@ -37,10 +37,6 @@ public class AccountCardFragment
 
     private ArrayAdapter<JSONObject> listAdapter;
 
-    public AccountCardFragment() {
-        soql = "SELECT Id, Name, Type, Industry, Website, Phone, BillingCity, BillingCountry, BillingPostalCode, BillingState, BillingStreet FROM Account ORDER BY LastViewedDate DESC LIMIT 5";
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.account_card_fragment, container, false);
@@ -62,4 +58,8 @@ public class AccountCardFragment
         return listAdapter;
     }
 
+    @Override
+    protected String getType() {
+        return "account";
+    }
 }

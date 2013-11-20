@@ -30,10 +30,6 @@ public class ContactCardFragment
 
     private ArrayAdapter<JSONObject> listAdapter;
 
-    public ContactCardFragment() {
-        soql = "SELECT Id, Name, Title, Phone, Email, Account.Name, MailingCity, MailingCountry, MailingPostalCode, MailingState, MailingStreet FROM Contact ORDER BY LastViewedDate DESC LIMIT 5";
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.contact_card_fragment, container, false);
@@ -53,6 +49,11 @@ public class ContactCardFragment
     @Override
     protected ArrayAdapter getArrayAdapter() {
         return listAdapter;
+    }
+
+    @Override
+    protected String getType() {
+        return "contact";
     }
 
 }
