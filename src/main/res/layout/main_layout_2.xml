@@ -18,7 +18,7 @@
         <EditText
             android:id="@+id/ok_salesforce_edit_text"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:hint="@string/ok_salesforce_hint"
             android:background="#FFFFFF"
             android:padding="10dp"
@@ -26,16 +26,18 @@
             android:inputType="textAutoCorrect"
             android:imeOptions="actionSearch"
             android:layout_gravity="bottom"
+            android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
             />
         <Button
             android:id="@+id/salesforce_now_button"
             android:onClick="onVoiceButtonClick"
-            android:layout_toRightOf="@+id/ok_salesforce_edit_text"
-            android:layout_height="40dp"
-            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_width="36dp"
             android:background="@drawable/ic_10_device_access_mic"
-            android:layout_centerHorizontal="true"
             android:layout_gravity="bottom"
+            android:paddingTop="2dp"
+            android:paddingBottom="4dp"
+            android:shadowColor=""
             >
             <requestFocus />
         </Button>
