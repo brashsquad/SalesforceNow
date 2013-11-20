@@ -1,37 +1,12 @@
 package com.blntsoft.salesforcenow;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
-import com.blntsoft.salesforcenow.adapter.AccountAdapter;
-import com.blntsoft.salesforcenow.adapter.ContactAdapter;
-import com.blntsoft.salesforcenow.adapter.OpportunityAdapter;
-import com.blntsoft.salesforcenow.card.AccountCardFragment;
-import com.blntsoft.salesforcenow.card.CardFragment;
-import com.blntsoft.salesforcenow.card.ContactCardFragment;
-import com.blntsoft.salesforcenow.card.OpportunityCardFragment;
-import com.blntsoft.salesforcenow.service.SpeechRecognizerService;
 import com.salesforce.androidsdk.rest.RestClient;
-import com.salesforce.androidsdk.rest.RestRequest;
-import com.salesforce.androidsdk.rest.RestResponse;
 import com.salesforce.androidsdk.ui.sfnative.SalesforceActivity;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by baolongnt on 11/18/13.
@@ -53,7 +28,7 @@ public class SearchResultActivity extends SalesforceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.search_layout);
+        setContentView(R.layout.search_result_layout);
 
         rootView = findViewById(R.id.root);
     }

@@ -11,4 +11,8 @@
     <string name="ok_salesforce_hint">Search, or say \"Ok Salesforce\"</string>
     <string name="speak_now_hint">Speak now</string>
 
+    <string name="accounts">Accounts</string>
+    <string name="contacts">Contacts</string>
+    <string name="opportunities">Opportunities</string>
+
 </resources>

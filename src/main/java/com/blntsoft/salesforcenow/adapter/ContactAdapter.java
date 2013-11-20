@@ -24,7 +24,7 @@ public class ContactAdapter extends ArrayAdapter<JSONObject> {
     }
 
     public ContactAdapter(Context context) {
-        super(context, R.layout.contract_item_layout);
+        super(context, R.layout.contact_item_layout);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ContactAdapter extends ArrayAdapter<JSONObject> {
         if (convertView == null) {
             viewHolder = new ViewHolder();
             LayoutInflater inflater = LayoutInflater.from(getContext());
-            convertView = inflater.inflate(R.layout.contract_item_layout, null);
+            convertView = inflater.inflate(R.layout.contact_item_layout, null);
             viewHolder.name = (TextView) convertView.findViewById(R.id.contract_name);
             viewHolder.phone = (TextView) convertView.findViewById(R.id.contact_phone);
             convertView.setTag(viewHolder);

@@ -38,8 +38,9 @@ public class AccountCardFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listView = (ListView)inflater.inflate(R.layout.account_card_fragment, container, false);
-        return listView;
+        View v = inflater.inflate(R.layout.account_card_fragment, container, false);
+        listView = (ListView)v.findViewById(R.id.account_list);
+        return v;
     }
 
     @Override
