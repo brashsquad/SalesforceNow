@@ -39,7 +39,9 @@ public abstract class CardFragment extends Fragment {
         Log.d(SalesforceNowApp.LOG_TAG, soql);
 
         try {
-            View noResultFound = rootView.findViewById(R.id.no_result_found_text);
+            final View spinner = rootView.findViewById(R.id.spinner);
+            final View noResultFound = rootView.findViewById(R.id.no_result_found_text);
+            spinner.setVisibility(View.VISIBLE);
             listView.setVisibility(View.GONE);
             noResultFound.setVisibility(View.GONE);
 
@@ -61,20 +63,21 @@ public abstract class CardFragment extends Fragment {
                             records = result.asJSONObject().getJSONArray("records");
                         }
 
-                        View noResultFound = rootView.findViewById(R.id.no_result_found_text);
                         if (records.length() > 0) {
-                            listView.setVisibility(View.VISIBLE);
-                            noResultFound.setVisibility(View.GONE);
-
                             for (int i=0; i<records.length(); i++) {
                                 JSONObject json = records.getJSONObject(i);
                                 getArrayAdapter().add(json);
                             }
+
+                            listView.setVisibility(View.VISIBLE);
+                            noResultFound.setVisibility(View.GONE);
                         }
                         else {
                             listView.setVisibility(View.GONE);
                             noResultFound.setVisibility(View.VISIBLE);
                         }
+
+                        spinner.setVisibility(View.GONE);
                     } catch (Exception e) {
                         onError(e);
                     }

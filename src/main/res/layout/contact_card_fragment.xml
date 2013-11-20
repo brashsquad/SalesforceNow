@@ -40,4 +40,18 @@
         android:gravity="center_vertical|center_horizontal"
         android:visibility="gone"/>
     />
+
+    <LinearLayout
+        android:id="@+id/spinner"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_below="@+id/account_logo" >
+        <ProgressBar
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            />
+    </LinearLayout>
+
 </RelativeLayout>
