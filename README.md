@@ -20,6 +20,6 @@ Steps
 * Update in line 2 of 'settings.gradle' with the path to your Salesforce Android SDK
 ````
     Ex: project(':SalesforceSDK').projectDir = new File('../SalesforceMobileSDK-Android/native/SalesforceSDK')
-`````
+````
 * Run 'gradlew' (Linux/MacOSX) or 'gradle.bat' (Windows). You can alternatively also load the project into Android Studio.
 * The APK will be in 'build/apk'
