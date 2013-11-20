@@ -4,7 +4,6 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +26,7 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
 
     private static class ViewHolder {
         TextView name;
-        TextView type;
+        TextView subtitle;
         ImageView map;
         ImageView web;
         ImageView call;
@@ -48,7 +47,7 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
             LayoutInflater inflater = LayoutInflater.from(getContext());
             convertView = inflater.inflate(R.layout.account_item_layout, null);
             viewHolder.name = (TextView) convertView.findViewById(R.id.account_name);
-            viewHolder.type = (TextView) convertView.findViewById(R.id.type_name);
+            viewHolder.subtitle = (TextView) convertView.findViewById(R.id.type_name);
             viewHolder.map = (ImageView) convertView.findViewById(R.id.account_map);
             viewHolder.web = (ImageView) convertView.findViewById(R.id.account_web);
             viewHolder.call = (ImageView) convertView.findViewById(R.id.account_call);
@@ -69,27 +68,31 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
                 subtitle = (!object.isNull("Type") ? object.getString("Type") : "") + " . " + (!object.isNull("Industry") ? object.getString("Industry") : "");
             }
 
-            viewHolder.type.setText(subtitle);
+            viewHolder.subtitle.setText(subtitle);
             viewHolder.map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //See http://stackoverflow.com/questions/13057463/passing-information-to-google-map-via-intent
-                    //TODO: Get address and clean it a little + URL encode it(?)
-                    /*try {
-                        String address = "";
+                    String address = "";
+                    try {
                         JSONObject json = getItem(position);
-                        address = json.getString("Address");
-                        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
-                        webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getContext().startActivity(webIntent);
-                    } catch (JSONException e) {
+                        StringBuilder builder = new StringBuilder();
+                        builder.append(!json.isNull("BillingStreet")?json.getString("BillingStreet")+",":"");
+                        builder.append(!json.isNull("BillingCity")?json.getString("BillingCity")+",":"");
+                        builder.append(!json.isNull("BillingState")?json.getString("BillingState")+",":"");
+                        builder.append(!json.isNull("BillingPostalCode")?json.getString("BillingPostalCode")+",":"");
+                        builder.append(!json.isNull("BillingCountry")?json.getString("BillingCountry")+",":"");
+                        address = builder.toString();
+                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + address));
+                        mapIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        getContext().startActivity(mapIntent);
+                    }
+                    catch (JSONException e) {
                         Log.e(SalesforceNowApp.LOG_TAG, null, e);
                     }
                     catch (ActivityNotFoundException e) {
                         Log.e(SalesforceNowApp.LOG_TAG, null, e);
-                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_map, address), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_open_map, address), Toast.LENGTH_SHORT).show();
                     }
-                    */
                 }
             });
             viewHolder.web.setOnClickListener(new View.OnClickListener() {
@@ -99,10 +102,15 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
                     try {
                         JSONObject json = getItem(position);
                         website = json.getString("Website");
+                        if (website != null
+                                && website.indexOf("http://") == -1) {
+                            website = "http://" + website;
+                        }
                         Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
                         webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getContext().startActivity(webIntent);
-                    } catch (JSONException e) {
+                    }
+                    catch (JSONException e) {
                         Log.e(SalesforceNowApp.LOG_TAG, null, e);
                     }
                     catch (ActivityNotFoundException e) {
