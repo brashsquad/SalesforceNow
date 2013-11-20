@@ -35,8 +35,9 @@ public class OpportunityCardFragment extends CardFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listView = (ListView)inflater.inflate(R.layout.opportunity_card_fragment, container, false);
-        return listView;
+        View v = inflater.inflate(R.layout.opportunity_card_fragment, container, false);
+        listView = (ListView)v.findViewById(R.id.opportunity_list);
+        return v;
     }
 
     @Override

@@ -36,8 +36,9 @@ public class ContactCardFragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        listView = (ListView)inflater.inflate(R.layout.contact_card_fragment, container, false);
-        return listView;
+        View v = inflater.inflate(R.layout.contact_card_fragment, container, false);
+        listView = (ListView)v.findViewById(R.id.contact_list);
+        return v;
     }
 
     @Override
