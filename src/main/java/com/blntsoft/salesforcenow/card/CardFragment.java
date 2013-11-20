@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -41,6 +42,7 @@ public abstract class CardFragment
     protected RestClient restClient;
     protected View rootView;
     protected ListView listView;
+    protected ImageView plusImage;
     protected String soql = null;
     protected String sosl = null;
 

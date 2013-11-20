@@ -11,11 +11,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.blntsoft.salesforcenow.R;
 import com.blntsoft.salesforcenow.SalesforceNowApp;
+import com.blntsoft.salesforcenow.SearchActivity;
 import com.blntsoft.salesforcenow.adapter.AccountAdapter;
 import com.salesforce.androidsdk.app.SalesforceSDKManager;
 import com.salesforce.androidsdk.rest.RestClient;
@@ -28,6 +30,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by baolongnt on 11/19/13.
@@ -42,6 +45,18 @@ public class AccountCardFragment
         rootView = inflater.inflate(R.layout.account_card_fragment, container, false);
         listView = (ListView)rootView.findViewById(R.id.account_list);
         listView.setOnItemClickListener(this);
+
+        plusImage = (ImageView)rootView.findViewById(R.id.add_action);
+        plusImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = SearchActivity.createUrlByType.get(getType());
+                Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(webIntent);
+            }
+        });
+
         return rootView;
     }
 

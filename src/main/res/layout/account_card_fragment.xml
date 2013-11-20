@@ -22,6 +22,14 @@
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="5dp"/>
+    <ImageView
+        android:id="@+id/add_action"
+        android:layout_height="35dp"
+        android:layout_width="35dp"
+        android:src="@drawable/plus"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="5dp"/>
 
     <ListView
         android:id="@+id/account_list"
