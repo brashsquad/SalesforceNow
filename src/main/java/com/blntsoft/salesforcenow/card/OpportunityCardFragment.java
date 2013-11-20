@@ -30,7 +30,7 @@ public class OpportunityCardFragment extends CardFragment {
     private ArrayAdapter<JSONObject> listAdapter;
 
     public OpportunityCardFragment() {
-        soql = "SELECT Id, Name, Type FROM Opportunity ORDER BY LastModifiedDate DESC LIMIT 5";
+        soql = "SELECT Id, Name, Type, Account.Name FROM Opportunity ORDER BY LastModifiedDate DESC LIMIT 5";
     }
 
     @Override

@@ -31,7 +31,7 @@ public class ContactCardFragment
     private ArrayAdapter<JSONObject> listAdapter;
 
     public ContactCardFragment() {
-        soql = "SELECT Id, Name, Phone FROM Contact ORDER BY LastModifiedDate DESC LIMIT 5";
+        soql = "SELECT Id, Name, Title, Phone, Email, Account.Name FROM Contact ORDER BY LastModifiedDate DESC LIMIT 5";
     }
 
     @Override

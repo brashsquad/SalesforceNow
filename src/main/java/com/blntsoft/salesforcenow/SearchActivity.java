@@ -30,9 +30,9 @@ public class SearchActivity extends Activity {
     static {
 
         fieldsCsvByType = new HashMap<String, String>();
-        fieldsCsvByType.put("account", "id,name,type");
-        fieldsCsvByType.put("contact", "id,name,phone");
-        fieldsCsvByType.put("opportunity", "id,name,type");
+        fieldsCsvByType.put("account", "id,name,type,industry,website,phone");
+        fieldsCsvByType.put("contact", "id,name,title,phone,email,Account.Name");
+        fieldsCsvByType.put("opportunity", "id,name,type,Account.Name");
 
     }
 
