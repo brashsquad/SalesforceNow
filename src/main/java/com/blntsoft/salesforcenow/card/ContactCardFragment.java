@@ -38,6 +38,7 @@ public class ContactCardFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.contact_card_fragment, container, false);
         listView = (ListView)rootView.findViewById(R.id.contact_list);
+        listView.setOnItemClickListener(this);
         return rootView;
     }
 

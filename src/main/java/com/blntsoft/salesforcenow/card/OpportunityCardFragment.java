@@ -37,6 +37,7 @@ public class OpportunityCardFragment extends CardFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.opportunity_card_fragment, container, false);
         listView = (ListView)rootView.findViewById(R.id.opportunity_list);
+        listView.setOnItemClickListener(this);
         return rootView;
     }
 

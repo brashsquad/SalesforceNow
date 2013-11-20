@@ -1,11 +1,15 @@
 package com.blntsoft.salesforcenow.card;
 
 import android.app.Fragment;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -19,6 +23,7 @@ import com.salesforce.androidsdk.rest.RestRequest;
 import com.salesforce.androidsdk.rest.RestResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -40,6 +45,7 @@ public class AccountCardFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.account_card_fragment, container, false);
         listView = (ListView)rootView.findViewById(R.id.account_list);
+        listView.setOnItemClickListener(this);
         return rootView;
     }
 
@@ -55,5 +61,6 @@ public class AccountCardFragment
     protected ArrayAdapter getArrayAdapter() {
         return listAdapter;
     }
+
 
 }

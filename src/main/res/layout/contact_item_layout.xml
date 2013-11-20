@@ -7,45 +7,53 @@
         android:id="@+id/contract_name"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:text="Contact Name"/>
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:text="Phone"
         android:layout_below="@+id/contract_name"
         android:layout_alignParentLeft="true"
-        android:id="@+id/contact_phone" />
+        android:id="@+id/contact_phone"/>
 
     <ImageView
         android:id="@+id/contact_map"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_7_location_map"
-        android:layout_toLeftOf="@+id/contact_web" />
+        android:layout_toLeftOf="@+id/contact_web"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/contact_web"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_7_location_web_site"
-        android:layout_toLeftOf="@+id/contact_email" />
+        android:layout_toLeftOf="@+id/contact_email"
+        android:clickable="true"
+        android:visibility="gone"/>
+
 
     <ImageView
         android:id="@+id/contact_email"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_5_content_email"
-        android:layout_toLeftOf="@+id/contact_text" />
+        android:layout_toLeftOf="@+id/contact_text"
+        android:clickable="true"/>
 
     <ImageView
         android:id="@+id/contact_text"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_6_social_chat"
-        android:layout_toLeftOf="@+id/contact_call" />
+        android:layout_toLeftOf="@+id/contact_call"
+        android:clickable="true"
+        android:visibility="gone"/>
+
 
     <ImageView
         android:id="@+id/contact_call"
@@ -53,6 +61,7 @@
         android:layout_height="35dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:src="@drawable/ic_10_device_access_call"/>
+        android:src="@drawable/ic_10_device_access_call"
+        android:clickable="true"/>
 
 </RelativeLayout>

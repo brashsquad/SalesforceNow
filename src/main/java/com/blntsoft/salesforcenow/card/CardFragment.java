@@ -2,9 +2,13 @@ package com.blntsoft.salesforcenow.card;
 
 import android.app.Fragment;
 import android.app.ListFragment;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -16,6 +20,7 @@ import com.salesforce.androidsdk.rest.RestRequest;
 import com.salesforce.androidsdk.rest.RestResponse;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
@@ -23,7 +28,9 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by baolongnt on 11/19/13.
  */
-public abstract class CardFragment extends Fragment {
+public abstract class CardFragment
+        extends Fragment
+        implements AdapterView.OnItemClickListener {
 
     protected RestClient restClient;
     protected View rootView;
@@ -90,6 +97,26 @@ public abstract class CardFragment extends Fragment {
             });
         }
         catch (UnsupportedEncodingException e) {
+            Log.e(SalesforceNowApp.LOG_TAG, null, e);
+        }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        try {
+            JSONObject json = (JSONObject)getArrayAdapter().getItem(position);
+            String recordId = json.getString("Id");
+            String baseUrl = restClient.getClientInfo().instanceUrl.toString();
+            String url = baseUrl + "/" + recordId;
+            Log.d(SalesforceNowApp.LOG_TAG, url);
+            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            getActivity().startActivity(webIntent);
+        }
+        catch (JSONException e) {
+            Log.e(SalesforceNowApp.LOG_TAG, null, e);
+        }
+        catch (ActivityNotFoundException e) {
             Log.e(SalesforceNowApp.LOG_TAG, null, e);
         }
     }

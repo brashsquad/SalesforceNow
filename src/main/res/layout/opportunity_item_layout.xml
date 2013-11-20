@@ -7,13 +7,13 @@
         android:id="@+id/opportunity_name"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:text="Opportunity Name"/>
 
     <TextView
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:text="Type"
         android:layout_below="@+id/opportunity_name"
         android:layout_alignParentLeft="true"
