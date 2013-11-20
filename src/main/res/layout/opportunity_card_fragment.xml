@@ -31,6 +31,7 @@
         android:layout_below="@+id/opportunity_logo"
         android:visibility="visible"
         tools:listitem="@layout/opportunity_item_layout"
+        android:layout_marginTop="5dp"
         >
     </ListView>
 
