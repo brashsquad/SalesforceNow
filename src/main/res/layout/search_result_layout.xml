@@ -29,8 +29,7 @@
                 android:name="com.blntsoft.salesforcenow.card.AccountCardFragment"
                 tools:layout="@layout/account_card_fragment"
                 android:tag="com.blntsoft.salesforcenow.card.AccountCardFragment"
-                />
-
+            />
 
             <fragment
                 android:id="@+id/contact_card_fragment"
@@ -40,7 +39,7 @@
                 android:name="com.blntsoft.salesforcenow.card.ContactCardFragment"
                 tools:layout="@layout/contact_card_fragment"
                 android:tag="com.blntsoft.salesforcenow.card.ContactCardFragment"
-                />
+            />
 
             <fragment
                 android:id="@+id/opportunity_card_fragment"
@@ -49,7 +48,8 @@
                 android:layout_height="280dp"
                 android:name="com.blntsoft.salesforcenow.card.OpportunityCardFragment"
                 tools:layout="@layout/opportunity_card_fragment"
-                android:tag="com.blntsoft.salesforcenow.card.OpportunityCardFragment"/>
+                android:tag="com.blntsoft.salesforcenow.card.OpportunityCardFragment"
+             />
 
         </LinearLayout>
 
