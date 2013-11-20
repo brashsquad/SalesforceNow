@@ -174,10 +174,12 @@ public abstract class CardFragment
                             getArrayAdapter().add(json);
                         }
 
+                        rootView.setVisibility(View.VISIBLE);
                         listView.setVisibility(View.VISIBLE);
                         noResultFound.setVisibility(View.GONE);
                     }
                     else {
+                        rootView.setVisibility(View.GONE);
                         listView.setVisibility(View.GONE);
                         noResultFound.setVisibility(View.VISIBLE);
                     }
