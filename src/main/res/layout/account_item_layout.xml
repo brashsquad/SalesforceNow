@@ -8,7 +8,12 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:text="Account Name"/>
+        android:text="Account Name"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/account_map"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -17,7 +22,11 @@
         android:text="Type - Industry"
         android:layout_below="@+id/account_name"
         android:layout_alignParentLeft="true"
-        android:id="@+id/type_name" />
+        android:layout_toLeftOf="@+id/account_map"
+        android:id="@+id/type_name"
+        android:layout_marginLeft="5dp"
+        android:singleLine="true"
+        android:ellipsize="end"/>
 
     <ImageView
         android:id="@+id/account_map"

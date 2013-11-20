@@ -8,7 +8,12 @@
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-        android:text="Contact Name"/>
+        android:text="Contact Name"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/contact_map"
+        android:ellipsize="end"
+        android:singleLine="true"/>
 
     <TextView
         android:layout_height="wrap_content"
@@ -17,7 +22,11 @@
         android:text="Phone"
         android:layout_below="@+id/contract_name"
         android:layout_alignParentLeft="true"
-        android:id="@+id/contact_phone"/>
+        android:id="@+id/contact_phone"
+        android:layout_toLeftOf="@+id/contact_map"
+        android:layout_marginLeft="5dp"
+        android:singleLine="true"
+        android:ellipsize="end"/>
 
     <ImageView
         android:id="@+id/contact_map"
