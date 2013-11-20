@@ -151,7 +151,9 @@ public class SpeechActivationService extends Service implements
 
     private SpeechActivator getRequestedActivator(Intent intent)
     {
-        SpeechActivator speechActivator = new WordActivator(this, this, "hello");
+        
+        String[] targetWords = new String[]{"okay", "sales", "force"};
+        SpeechActivator speechActivator = new WordActivator(this, this, targetWords);
 
         /* String type = intent.getStringExtra(ACTIVATION_TYPE_INTENT_KEY);
         // create based on a type name
