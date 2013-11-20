@@ -29,10 +29,6 @@ public class OpportunityCardFragment extends CardFragment {
 
     private ArrayAdapter<JSONObject> listAdapter;
 
-    public OpportunityCardFragment() {
-        soql = "SELECT Id, Name, Type, Account.Name, StageName, CloseDate, Amount FROM Opportunity ORDER BY LastViewedDate DESC LIMIT 5";
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.opportunity_card_fragment, container, false);
@@ -52,6 +48,11 @@ public class OpportunityCardFragment extends CardFragment {
     @Override
     protected ArrayAdapter getArrayAdapter() {
         return listAdapter;
+    }
+
+    @Override
+    protected String getType() {
+        return "opportunity";
     }
 
 }

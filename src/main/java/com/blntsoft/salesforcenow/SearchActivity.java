@@ -24,18 +24,14 @@ public class SearchActivity extends Activity {
     private static final int VOICE_EVENT_ID             = 1;
     public static final String SEARCH_QUERY_EXTRA      = "Search Query";
 
-    private static HashMap<String,String> fieldsCsvByType;
+    public static HashMap<String,String> fieldsCsvByType;
 
     static {
-
         fieldsCsvByType = new HashMap<String, String>();
         fieldsCsvByType.put("account", "id,name,type,industry,website,phone,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStreet");
         fieldsCsvByType.put("contact", "id,name,title,phone,email,Account.Name,MailingCity,MailingCountry,MailingPostalCode,MailingState,MailingStreet");
         fieldsCsvByType.put("opportunity", "id,name,type,Account.Name,StageName,closedate,amount");
-
     }
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
