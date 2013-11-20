@@ -16,4 +16,8 @@
     <string name="opportunities">Opportunities</string>
 
     <string name="no_result_found">No result found</string>
+
+    <string name="unable_to_dial">Unable to dial: %s</string>
+    <string name="unable_to_open_website">Unable to open website: %s</string>
+    <string name="unable_to_open_map">Unable to map: %s</string>
 </resources>

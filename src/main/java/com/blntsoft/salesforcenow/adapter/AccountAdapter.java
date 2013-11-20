@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.blntsoft.salesforcenow.R;
 import com.blntsoft.salesforcenow.SalesforceNowApp;
@@ -66,8 +67,9 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
                     //See http://stackoverflow.com/questions/13057463/passing-information-to-google-map-via-intent
                     //TODO: Get address and clean it a little + URL encode it(?)
                     /*try {
+                        String address = "";
                         JSONObject json = getItem(position);
-                        String address = json.getString("Website");
+                        address = json.getString("Address");
                         Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
                         webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getContext().startActivity(webIntent);
@@ -76,6 +78,7 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
                     }
                     catch (ActivityNotFoundException e) {
                         Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_map, address), Toast.LENGTH_SHORT).show();
                     }
                     */
                 }
@@ -83,9 +86,10 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
             viewHolder.web.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String website = "";
                     try {
                         JSONObject json = getItem(position);
-                        String website = json.getString("Website");
+                        website = json.getString("Website");
                         Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
                         webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getContext().startActivity(webIntent);
@@ -94,6 +98,7 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
                     }
                     catch (ActivityNotFoundException e) {
                         Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_open_website, website), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -102,9 +107,10 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
                 public void onClick(View v) {
                     //WARNING: This actually dials the number and does not just bring up the dialer
                     //Dialer: use ACTION_VIEW instead
+                    String phone = "";
                     try {
                         JSONObject json = getItem(position);
-                        String phone = json.getString("Phone");
+                        phone = json.getString("Phone");
                         Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
                         callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         getContext().startActivity(callIntent);
@@ -114,6 +120,7 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
                     }
                     catch (ActivityNotFoundException e) {
                         Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_dial, phone), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
