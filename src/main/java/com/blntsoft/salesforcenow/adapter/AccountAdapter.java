@@ -69,78 +69,90 @@ public class AccountAdapter extends ArrayAdapter<JSONObject> {
             }
 
             viewHolder.subtitle.setText(subtitle);
-            viewHolder.map.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String address = "";
-                    try {
-                        JSONObject json = getItem(position);
-                        StringBuilder builder = new StringBuilder();
-                        builder.append(!json.isNull("BillingStreet")?json.getString("BillingStreet")+",":"");
-                        builder.append(!json.isNull("BillingCity")?json.getString("BillingCity")+",":"");
-                        builder.append(!json.isNull("BillingState")?json.getString("BillingState")+",":"");
-                        builder.append(!json.isNull("BillingPostalCode")?json.getString("BillingPostalCode")+",":"");
-                        builder.append(!json.isNull("BillingCountry")?json.getString("BillingCountry")+",":"");
-                        address = builder.toString();
-                        Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + address));
-                        mapIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getContext().startActivity(mapIntent);
-                    }
-                    catch (JSONException e) {
-                        Log.e(SalesforceNowApp.LOG_TAG, null, e);
-                    }
-                    catch (ActivityNotFoundException e) {
-                        Log.e(SalesforceNowApp.LOG_TAG, null, e);
-                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_open_map, address), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-            viewHolder.web.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String website = "";
-                    try {
-                        JSONObject json = getItem(position);
-                        website = json.getString("Website");
-                        if (website != null
-                                && website.indexOf("http://") == -1) {
-                            website = "http://" + website;
+            JSONObject json = getItem(position);
+            StringBuilder builder = new StringBuilder();
+            builder.append(!json.isNull("BillingStreet")?json.getString("BillingStreet")+",":"");
+            builder.append(!json.isNull("BillingCity")?json.getString("BillingCity")+",":"");
+            builder.append(!json.isNull("BillingState")?json.getString("BillingState")+",":"");
+            builder.append(!json.isNull("BillingPostalCode")?json.getString("BillingPostalCode")+",":"");
+            builder.append(!json.isNull("BillingCountry")?json.getString("BillingCountry")+",":"");
+            final String address = builder.toString();
+            if ("".equals(address)) {
+                viewHolder.map.setVisibility(View.GONE);
+            }
+            else {
+                viewHolder.map.setVisibility(View.VISIBLE);
+
+                viewHolder.map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent mapIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + address));
+                            mapIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            getContext().startActivity(mapIntent);
                         }
-                        Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
-                        webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getContext().startActivity(webIntent);
+                        catch (ActivityNotFoundException e) {
+                            Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                            Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_open_map, address), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    catch (JSONException e) {
-                        Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                });
+            }
+            String tmpWebsite = json.isNull("Website")?"":json.getString("Website");
+            if (!tmpWebsite.equals("")
+                && tmpWebsite.indexOf("http://") == -1) {
+                tmpWebsite = "http://" + tmpWebsite;
+            }
+            final String website = tmpWebsite;
+            if ("".equals(website)) {
+                viewHolder.web.setVisibility(View.INVISIBLE);
+            }
+            else {
+                viewHolder.web.setVisibility(View.VISIBLE);
+                viewHolder.web.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try {
+                            Intent webIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(website));
+                            webIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            getContext().startActivity(webIntent);
+                        }
+                        catch (ActivityNotFoundException e) {
+                            Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                            Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_open_website, website), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    catch (ActivityNotFoundException e) {
-                        Log.e(SalesforceNowApp.LOG_TAG, null, e);
-                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_open_website, website), Toast.LENGTH_SHORT).show();
+                });
+            }
+            final String phone = json.isNull("Phone")?"":json.getString("Phone");
+            if ("".equals(phone)) {
+                viewHolder.call.setVisibility(View.INVISIBLE);
+            }
+            else {
+                viewHolder.call.setVisibility(View.VISIBLE);
+                viewHolder.call.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //WARNING: This actually dials the number and does not just bring up the dialer
+                        //Dialer: use ACTION_VIEW instead
+                        String phone = "";
+                        try {
+                            JSONObject json = getItem(position);
+                            phone = json.getString("Phone");
+                            Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
+                            callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            getContext().startActivity(callIntent);
+                        }
+                        catch (JSONException e) {
+                            Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                        }
+                        catch (ActivityNotFoundException e) {
+                            Log.e(SalesforceNowApp.LOG_TAG, null, e);
+                            Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_dial, phone), Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
-            viewHolder.call.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //WARNING: This actually dials the number and does not just bring up the dialer
-                    //Dialer: use ACTION_VIEW instead
-                    String phone = "";
-                    try {
-                        JSONObject json = getItem(position);
-                        phone = json.getString("Phone");
-                        Intent callIntent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        getContext().startActivity(callIntent);
-                    }
-                    catch (JSONException e) {
-                        Log.e(SalesforceNowApp.LOG_TAG, null, e);
-                    }
-                    catch (ActivityNotFoundException e) {
-                        Log.e(SalesforceNowApp.LOG_TAG, null, e);
-                        Toast.makeText(getContext(), getContext().getResources().getString(R.string.unable_to_dial, phone), Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+                });
+            }
         } catch (JSONException e) {
             Log.e("AccountAdapter", null, e);
         }
