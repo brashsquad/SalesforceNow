@@ -24,7 +24,7 @@
             <fragment
                 android:id="@+id/account_card_fragment"
                 android:layout_width="fill_parent"
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 android:layout_margin="20dp"
                 android:name="com.blntsoft.salesforcenow.card.AccountCardFragment"
                 tools:layout="@layout/account_card_fragment"
@@ -36,7 +36,7 @@
                 android:id="@+id/contact_card_fragment"
                 android:layout_margin="20dp"
                 android:layout_width="fill_parent"
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 android:name="com.blntsoft.salesforcenow.card.ContactCardFragment"
                 tools:layout="@layout/contact_card_fragment"
                 android:tag="com.blntsoft.salesforcenow.card.ContactCardFragment"
@@ -46,7 +46,7 @@
                 android:id="@+id/opportunity_card_fragment"
                 android:layout_margin="20dp"
                 android:layout_width="fill_parent"
-                android:layout_height="250dp"
+                android:layout_height="300dp"
                 android:name="com.blntsoft.salesforcenow.card.OpportunityCardFragment"
                 tools:layout="@layout/opportunity_card_fragment"
                 android:tag="com.blntsoft.salesforcenow.card.OpportunityCardFragment"/>
@@ -54,4 +54,5 @@
         </LinearLayout>
 
     </ScrollView>
+
 </LinearLayout>
