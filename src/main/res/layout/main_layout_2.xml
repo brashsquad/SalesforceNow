@@ -3,17 +3,25 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/root">
+    android:id="@+id/root"
+    >
 
+    <ImageView
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:src="@drawable/salesforce_header"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        />
     <LinearLayout
         android:id="@+id/salesforce_header"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
-        android:background="@drawable/salesforce_header"
+        android:background="#ffffff"
         android:orientation="horizontal"
-        android:layout_alignParentTop="true"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="10dp"
         android:layout_centerHorizontal="true"
-        android:padding="10dp"
         >
         <EditText
             android:id="@+id/ok_salesforce_edit_text"
@@ -25,7 +33,7 @@
             android:singleLine="true"
             android:inputType="textAutoCorrect"
             android:imeOptions="actionSearch"
-            android:layout_gravity="bottom"
+            android:layout_gravity="center_horizontal"
             android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
             />
         <Button
@@ -35,8 +43,6 @@
             android:layout_width="36dp"
             android:background="@drawable/ic_10_device_access_mic"
             android:layout_gravity="bottom"
-            android:paddingTop="2dp"
-            android:paddingBottom="4dp"
             >
         </Button>
     </LinearLayout>
