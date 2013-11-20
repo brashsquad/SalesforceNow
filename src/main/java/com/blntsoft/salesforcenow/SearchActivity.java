@@ -22,7 +22,6 @@ public class SearchActivity extends Activity {
      */
 
     private static final int VOICE_EVENT_ID             = 1;
-
     public static final String SEARCH_QUERY_EXTRA      = "Search Query";
 
     private static HashMap<String,String> fieldsCsvByType;
@@ -30,9 +29,9 @@ public class SearchActivity extends Activity {
     static {
 
         fieldsCsvByType = new HashMap<String, String>();
-        fieldsCsvByType.put("account", "id,name,type,industry,website,phone");
-        fieldsCsvByType.put("contact", "id,name,title,phone,email,Account.Name");
-        fieldsCsvByType.put("opportunity", "id,name,type,Account.Name");
+        fieldsCsvByType.put("account", "id,name,type,industry,website,phone,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStreet");
+        fieldsCsvByType.put("contact", "id,name,title,phone,email,Account.Name,BillingCity,BillingCountry,BillingPostalCode,BillingState,BillingStreet");
+        fieldsCsvByType.put("opportunity", "id,name,type,Account.Name,stage,closedate,amount");
 
     }
 
