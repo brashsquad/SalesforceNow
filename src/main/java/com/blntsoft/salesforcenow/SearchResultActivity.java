@@ -26,7 +26,7 @@ public class SearchResultActivity extends SalesforceActivity {
     public static String SEARCH_SCOPE_EXTRA = "Search Scope";
     public static String SEARCH_FIELDS_EXTRA = "Search Fields";
 
-    private static final int LIMIT = 20;
+    private static final int LIMIT = 5;
 
     private static final String TAG = "SearchResultActivity";
 
