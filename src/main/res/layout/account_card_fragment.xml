@@ -26,6 +26,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/card_background"
-        android:layout_below="@+id/account_logo">
+        android:layout_below="@+id/account_logo"
+        android:visibility="gone">
     </ListView>
+
+    <TextView
+        android:id="@+id/no_result_found_text"
+        android:layout_height="fill_parent"
+        android:layout_width="fill_parent"
+        android:text="@string/no_result_found"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Large"
+        android:layout_below="@+id/account_logo"
+        android:gravity="center_vertical|center_horizontal"
+        android:visibility="gone"/>
+    />
 </RelativeLayout>

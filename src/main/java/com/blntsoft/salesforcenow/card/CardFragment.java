@@ -3,6 +3,7 @@ package com.blntsoft.salesforcenow.card;
 import android.app.Fragment;
 import android.app.ListFragment;
 import android.util.Log;
+import android.view.View;
 import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -25,6 +26,7 @@ import java.io.UnsupportedEncodingException;
 public abstract class CardFragment extends Fragment {
 
     protected RestClient restClient;
+    protected View rootView;
     protected ListView listView;
     protected String soql;
     protected String sosl;
@@ -37,6 +39,10 @@ public abstract class CardFragment extends Fragment {
         Log.d(SalesforceNowApp.LOG_TAG, soql);
 
         try {
+            View noResultFound = rootView.findViewById(R.id.no_result_found_text);
+            listView.setVisibility(View.GONE);
+            noResultFound.setVisibility(View.GONE);
+
             RestRequest restRequest;
             if (sosl != null) {
                 restRequest = RestRequest.getRequestForSearch(getString(R.string.api_version), sosl);
@@ -48,7 +54,6 @@ public abstract class CardFragment extends Fragment {
                 @Override
                 public void onSuccess(RestRequest request, RestResponse result) {
                     try {
-
                         JSONArray records = null;
                         if (sosl != null) {
                             records = result.asJSONArray();
@@ -56,9 +61,19 @@ public abstract class CardFragment extends Fragment {
                             records = result.asJSONObject().getJSONArray("records");
                         }
 
-                        for (int i=0; i<records.length(); i++) {
-                            JSONObject json = records.getJSONObject(i);
-                            getArrayAdapter().add(json);
+                        View noResultFound = rootView.findViewById(R.id.no_result_found_text);
+                        if (records.length() > 0) {
+                            listView.setVisibility(View.VISIBLE);
+                            noResultFound.setVisibility(View.GONE);
+
+                            for (int i=0; i<records.length(); i++) {
+                                JSONObject json = records.getJSONObject(i);
+                                getArrayAdapter().add(json);
+                            }
+                        }
+                        else {
+                            listView.setVisibility(View.GONE);
+                            noResultFound.setVisibility(View.VISIBLE);
                         }
                     } catch (Exception e) {
                         onError(e);
