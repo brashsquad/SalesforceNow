@@ -103,7 +103,8 @@ public class SearchActivity extends Activity {
 
             Log.d("SearchActivity", "WordList: " + wordList);
 
-            for (int i = 1; i < wordList.size(); i++) {
+            int startIndex = wordList.contains("search") ? 1 : 0;
+            for (int i = startIndex; i < wordList.size(); i++) {
                 String word = wordList.get(i);
                 if (this.fieldsCsvByType.containsKey(word.toLowerCase())) {
                     searchScopeList.add(word);
