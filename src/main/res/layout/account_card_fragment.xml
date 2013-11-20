@@ -30,7 +30,8 @@
         android:background="@color/card_background"
         android:layout_below="@+id/account_logo"
         android:visibility="visible"
-        tools:listitem="@layout/account_item_layout">
+        tools:listitem="@layout/account_item_layout"
+        android:layout_marginTop="5dp">
     </ListView>
 
     <TextView
