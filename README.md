@@ -1,8 +1,6 @@
-Salesforce Now
-==============
 
 Description
------------
+===========
 
 Salesforce Now is the perfect companion to Salesforce1 on Android.
 
@@ -13,6 +11,15 @@ Salesforce Now tightly integrates with both your Android mobile device and Sales
 This alpha version of the app only supports the Account, Contact & Opportunity objects and the New and Edit record actions. We are building the code to be generic so that it will support any object and many more record actions.
 
 
+Demo
+====
+
+[https://www.youtube.com/watch?v=Y0EK6DMfbUw](YouTube video)
+
+
+Build The App
+=============
+
 Requirements
 ------------
 
@@ -21,8 +28,9 @@ Requirements
 * Android SDK 17
 * [Salesforce Android SDK 2.1](https://github.com/forcedotcom/SalesforceMobileSDK-Android)
 
-Build the app
--------------
+
+Steps
+-----
 
 * Generate a 'local.properties' file with the 'sdk.dir' property pointing to your Android SDK installation. You create the file manually or run 'android update project -p .'
 * Copy build-SalesforceSDK.gradle' into the Salesforce Android SDK folder as 'build.gradle'
@@ -35,3 +43,4 @@ Build the app
 ````
 * Run 'gradlew build' (Linux/MacOSX) or 'gradle.bat build' (Windows). You can alternatively also load the project into Android Studio.
 * The APK will be in 'build/apk'
+ 
