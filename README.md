@@ -33,5 +33,5 @@ Build the app
 ````
     Ex: project(':SalesforceSDK').projectDir = new File('../SalesforceMobileSDK-Android/native/SalesforceSDK')
 ````
-* Run 'gradlew' (Linux/MacOSX) or 'gradle.bat' (Windows). You can alternatively also load the project into Android Studio.
+* Run 'gradlew build' (Linux/MacOSX) or 'gradle.bat build' (Windows). You can alternatively also load the project into Android Studio.
 * The APK will be in 'build/apk'
