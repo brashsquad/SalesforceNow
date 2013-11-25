@@ -16,8 +16,8 @@ Demo
 [YouTube video](https://www.youtube.com/watch?v=Y0EK6DMfbUw)
 
 
-Build The App
-=============
+Building The App
+================
 
 Requirements
 ------------
