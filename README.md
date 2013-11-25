@@ -13,7 +13,7 @@ This alpha version of the app only supports the Account, Contact & Opportunity o
 Demo
 ====
 
-[https://www.youtube.com/watch?v=Y0EK6DMfbUw](YouTube video)
+[YouTube video](https://www.youtube.com/watch?v=Y0EK6DMfbUw)
 
 
 Build The App
