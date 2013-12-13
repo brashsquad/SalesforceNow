@@ -13,6 +13,8 @@ This alpha version of the app only supports the Account, Contact & Opportunity o
 Demo
 ====
 
+The inital version of this app was built over 3 days during the [Dreamforce 2013 hackathon](http://events.developerforce.com/dreamforce/hackathon)
+
 [YouTube video](https://www.youtube.com/watch?v=Y0EK6DMfbUw)
 
 
