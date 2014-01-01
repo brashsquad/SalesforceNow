@@ -1,21 +1,5 @@
-/*
- * Copyright 2011 Greg Milette and Adam Stroud
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * 		http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.blntsoft.salesforcenow.service;
 
-import android.app.Notification;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -25,33 +9,28 @@ import android.util.Log;
 
 import com.blntsoft.salesforcenow.SalesforceNowApp;
 import com.blntsoft.salesforcenow.SearchActivity;
-import com.blntsoft.salesforcenow.SearchResultActivity;
 
 import root.gast.speech.activation.SpeechActivationListener;
 import root.gast.speech.activation.SpeechActivator;
 import root.gast.speech.activation.WordActivator;
 
+/**
+ * Derived from root.gast.speech.activation.SpeechActivationService
+ * See https://github.com/gast-lib/gast-lib/blob/master/library/src/root/gast/speech/activation/SpeechActivationService.java
+ */
 public class SpeechActivationService extends Service implements
         SpeechActivationListener
 {
     private static final String TAG = SalesforceNowApp.LOG_TAG;
 
-    public static final String NOTIFICATION_ICON_RESOURCE_INTENT_KEY =
-            "NOTIFICATION_ICON_RESOURCE_INTENT_KEY";
     public static final String ACTIVATION_TYPE_INTENT_KEY =
             "ACTIVATION_TYPE_INTENT_KEY";
-    public static final String ACTIVATION_RESULT_INTENT_KEY =
-            "ACTIVATION_RESULT_INTENT_KEY";
-    public static final String ACTIVATION_RESULT_BROADCAST_NAME =
-            "root.gast.playground.speech.ACTIVATION";
 
     /**
      * send this when external code wants the Service to stop
      */
     public static final String ACTIVATION_STOP_INTENT_KEY =
             "ACTIVATION_STOP_INTENT_KEY";
-
-    public static final int NOTIFICATION_ID = 10298;
 
     private boolean isStarted;
 
@@ -103,7 +82,7 @@ public class SpeechActivationService extends Service implements
                     // the new one
                     if (isDifferentType(intent))
                     {
-                        Log.d(TAG, "is differnet type");
+                        Log.d(TAG, "is different type");
                         stopActivator();
                         startDetecting(intent);
                     }
@@ -139,19 +118,14 @@ public class SpeechActivationService extends Service implements
         Log.d(TAG, "started: " + activator.getClass().getSimpleName());
         isStarted = true;
         activator.detectActivation();
-        //startForeground(NOTIFICATION_ID, getNotification(intent));
     }
 
     private SpeechActivator getRequestedActivator(Intent intent)
     {
-        //Hack
+        //Hack: We only listen for a single word instead for the phrase "ok Salesforce"
         String[] targetWords = new String[]{"okay", "sales", "force", "ok", "salesforce"};
         SpeechActivator speechActivator = new WordActivator(this, this, targetWords);
 
-        /* String type = intent.getStringExtra(ACTIVATION_TYPE_INTENT_KEY);
-        // create based on a type name
-        SpeechActivator speechActivator =
-                SpeechActivatorFactory.createSpeechActivator(this, this, type); */
         return speechActivator;
     }
 
@@ -210,12 +184,6 @@ public class SpeechActivationService extends Service implements
             activator.stop();
             isStarted = false;
         }
-    }
-
-    private Notification getNotification(Intent intent)
-    {
-        // determine label based on the class
-        return null;
     }
 
     @Override
