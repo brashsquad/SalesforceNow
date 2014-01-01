@@ -1,17 +1,14 @@
 package com.blntsoft.salesforcenow.card;
 
 import android.app.Fragment;
-import android.app.ListFragment;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import com.blntsoft.salesforcenow.R;
@@ -20,15 +17,12 @@ import com.blntsoft.salesforcenow.SearchActivity;
 import com.salesforce.androidsdk.rest.RestClient;
 import com.salesforce.androidsdk.rest.RestRequest;
 import com.salesforce.androidsdk.rest.RestResponse;
-import com.salesforce.androidsdk.ui.PasscodeActivity;
 
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,7 +97,7 @@ public abstract class CardFragment
                             populateList(RestRequest.getRequestForQuery(getString(R.string.api_version), soql ));
                         }
                         catch (Exception e) {
-                            onError(e);;
+                            onError(e);
                         }
                     }
 
