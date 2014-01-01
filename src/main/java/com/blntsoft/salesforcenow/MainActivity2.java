@@ -23,12 +23,6 @@ import com.salesforce.androidsdk.ui.sfnative.SalesforceActivity;
 
 import java.util.ArrayList;
 
-/**
- * An example full-screen activity that shows and hides the system UI (i.e.
- * status bar and navigation/system bar) with user interaction.
- *
- * @see com.blntsoft.salesforcenow.util.SystemUiHider
- */
 public class MainActivity2 extends SalesforceActivity {
 
     /*
